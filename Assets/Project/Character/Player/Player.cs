@@ -5,9 +5,9 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] SwipeController swipeController;
-    [SerializeField] PolygonGenerator polygonGenerator;
-    [SerializeField] Transform playerGraphics;
+    [SerializeField] SwipeController swipeController = null;
+    [SerializeField] PolygonGenerator polygonGenerator = null;
+    [SerializeField] Transform playerGraphics = null;
 
     List<AttackDirection> possibleAttackDirection;
 
@@ -15,6 +15,11 @@ public class Player : MonoBehaviour
     {
         polygonGenerator.OnGenerate += SetAttackDirection;
         swipeController.OnSwipe += CheckSwipe;
+    }
+
+    private void Start()
+    {
+        SetAttackDirection();
     }
 
     private void OnDisable()

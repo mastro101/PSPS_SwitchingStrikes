@@ -15,20 +15,15 @@ public class PolygonGenerator : MonoBehaviour
 
     public Action OnGenerate;
 
-    Mesh mesh;
-    List<Vector3> vertices;
-    int[] indices;
-    List<Vector2> UVs;
+    [SerializeField][HideInInspector] Mesh mesh;
+    [SerializeField][HideInInspector] List<Vector3> vertices;
+    [SerializeField][HideInInspector] int[] indices;
+    [SerializeField][HideInInspector] List<Vector2> UVs;
 
-    Transform bonesParentTransform;
+    [SerializeField][HideInInspector] Transform bonesParentTransform;
 
-    Transform[] bones;
-    Matrix4x4[] bindPoses;
-
-    private void Awake()
-    {
-        GenerateMesh();
-    }
+    [SerializeField][HideInInspector] Transform[] bones;
+    [SerializeField][HideInInspector] Matrix4x4[] bindPoses;
 
     private void OnDestroy()
     {

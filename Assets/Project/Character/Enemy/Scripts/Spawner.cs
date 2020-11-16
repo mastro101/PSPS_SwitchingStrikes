@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] PolygonGenerator polygon;
+    [SerializeField] PolygonGenerator polygon = null;
 
     [SerializeField] Enemy enemy = null;
     [SerializeField] float minTime = 1;
