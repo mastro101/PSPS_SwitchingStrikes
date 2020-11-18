@@ -110,7 +110,7 @@ MonoBehaviour:
   OnDeathUE:
     m_PersistentCalls:
       m_Calls: []
-  _currentSpeed: 0.2
+  _currentSpeed: 0.8
   _startLife: 1
 --- !u!114 &8668988917063857011
 MonoBehaviour:
