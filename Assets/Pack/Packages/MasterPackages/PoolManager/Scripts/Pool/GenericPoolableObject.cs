@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GenericPoolableObject : MonoBehaviour, IPoolable
 {
-    public PoolManager poolManager { get; set; }
+    [SerializeField] public PoolManager poolManager { get; set; }
 
     public Action OnSpawn;
 

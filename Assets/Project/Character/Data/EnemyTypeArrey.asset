@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2359de687524569439b784476e5949c9, type: 3}
-  m_Name: PlayerScore
+  m_Script: {fileID: 11500000, guid: cc24f6b5507224643ae2134299b5d50e, type: 3}
+  m_Name: EnemyTypeArrey
   m_EditorClassIdentifier: 
-  _value: 0
+  enemyTypes:
+  - {fileID: 11400000, guid: 4c0075cdf6c33284f9de215458bf6e08, type: 2}
+  - {fileID: 11400000, guid: 00c8e2a47b009f8479fe5a96408a9d85, type: 2}

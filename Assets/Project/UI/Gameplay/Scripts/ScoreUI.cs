@@ -5,16 +5,20 @@ using TMPro;
 
 public class ScoreUI : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI text;
-    [SerializeField] FloatData score;
+    [SerializeField] TextMeshProUGUI text = null;
+    [SerializeField] FloatData score = null;
 
     private void Awake()
     {
+        text.text = 0.ToString();
         if (score)
         {
+            SetText(score.value);
             score.OnChangeValue += SetText;
         }
     }
+
+
 
     void SetText(float f)
     {

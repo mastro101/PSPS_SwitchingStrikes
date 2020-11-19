@@ -11,10 +11,16 @@ public class Player : MonoBehaviour , ICollidable
     [Space]
     [SerializeField] float startLife = 1f;
 
+    [SerializeField] EnemyTypeArrey _enemyTypeArrey;
+    EnemyTypeArrey enemyTypeArrey { get => _enemyTypeArrey; set { _enemyTypeArrey = value; typeCount = _enemyTypeArrey.enemyTypes.Length; } }
+    EnemyType currentType;
+
     public FloatData score;
 
     List<AttackDirection> possibleAttackDirection;
     float currentLife;
+    SpriteRenderer playerGraphicsSprite;
+
 
     public CollisionEvent collisionEvent { get; private set; }
 
@@ -26,18 +32,23 @@ public class Player : MonoBehaviour , ICollidable
         collisionEvent = new CollisionEvent(TriggerEnter, null, null, null, null, null);
         polygonGenerator.OnGenerate += SetAttackDirection;
         swipeController.OnSwipe += CheckSwipe;
+        swipeController.OnTouchAndRealese += ChangeType;
         activeCollide = true;
+        playerGraphicsSprite = playerGraphics.GetComponent<SpriteRenderer>();
+        typeCount = _enemyTypeArrey.enemyTypes.Length;
     }
 
     private void Start()
     {
         SetAttackDirection();
+        ChangeType();
     }
 
     private void OnDisable()
     {
         polygonGenerator.OnGenerate -= SetAttackDirection;
         swipeController.OnSwipe -= CheckSwipe;
+        swipeController.OnTouchAndRealese -= ChangeType;
         activeCollide = false;
     }
 
@@ -48,8 +59,8 @@ public class Player : MonoBehaviour , ICollidable
         {
             if (enemy)
             {
-                enemy.TakeDamage(this);
-                Debug.Log("collide");
+                if (enemy.type.type == currentType.type)
+                    enemy.TakeDamage(this);
             }
         }
     }
@@ -71,37 +82,73 @@ public class Player : MonoBehaviour , ICollidable
 
     void CheckSwipe(SwipeData swipe)
     {
-        float swipeAngle = swipe.angle;
-        AttackDirection tempAttDirOne = null, tempAttDirTwo = null;
-        float angleOne = 0; float angleTwo = 0;
-        for (int i = 0; i < possibleAttackDirection.Count; i ++)
+        if (!onAttack)
         {
-            tempAttDirOne = possibleAttackDirection[i];
-            angleOne = tempAttDirOne.angle;
-            if (i == possibleAttackDirection.Count - 1)
+            float swipeAngle = swipe.angle;
+            AttackDirection tempAttDirOne = null, tempAttDirTwo = null;
+            float angleOne = 0; float angleTwo = 0;
+            for (int i = 0; i < possibleAttackDirection.Count; i++)
             {
-                tempAttDirTwo = possibleAttackDirection[0];
-                angleTwo = 360f;
-            }
-            else
-            {
-                tempAttDirTwo = possibleAttackDirection[i + 1];
-                angleTwo = tempAttDirTwo.angle;
+                tempAttDirOne = possibleAttackDirection[i];
+                angleOne = tempAttDirOne.angle;
+                if (i == possibleAttackDirection.Count - 1)
+                {
+                    tempAttDirTwo = possibleAttackDirection[0];
+                    angleTwo = 360f;
+                }
+                else
+                {
+                    tempAttDirTwo = possibleAttackDirection[i + 1];
+                    angleTwo = tempAttDirTwo.angle;
+                }
+
+                if (swipeAngle > tempAttDirOne.angle && swipeAngle < tempAttDirTwo.angle)
+                {
+                    break;
+                }
             }
 
-            if (swipeAngle > tempAttDirOne.angle && swipeAngle < tempAttDirTwo.angle)
+            if (swipeAngle - tempAttDirOne.angle <= tempAttDirTwo.angle - swipeAngle)
             {
-                break;
+                Attack(tempAttDirOne.targetPos);
+            }
+            else if (swipeAngle - tempAttDirOne.angle > tempAttDirTwo.angle - swipeAngle)
+            {
+                Attack(tempAttDirTwo.targetPos);
             }
         }
+    }
 
-        if (swipeAngle - tempAttDirOne.angle <= tempAttDirTwo.angle - swipeAngle)
+    int typeIndex;
+    int typeCount;
+    void ChangeType()
+    {
+        currentType = enemyTypeArrey.enemyTypes[typeIndex];
+        ChangeColor(currentType.color);
+        typeIndex++;
+        if (typeIndex >= typeCount)
+            typeIndex = 0;
+    }
+    
+    void ChangeType(int index)
+    {
+        if (index >= 0 && index < enemyTypeArrey.enemyTypes.Length)
         {
-            Attack(tempAttDirOne.targetPos);
+            currentType = enemyTypeArrey.enemyTypes[index];
+            ChangeColor(currentType.color);
+            typeIndex = index + 1;
+            if (typeIndex >= typeCount)
+                typeIndex = 0;
         }
-        else if (swipeAngle - tempAttDirOne.angle > tempAttDirTwo.angle - swipeAngle)
+        else
+            Debug.LogWarning("index out of range");
+    }
+
+    void ChangeColor(Color c)
+    {
+        if (playerGraphicsSprite)
         {
-            Attack(tempAttDirTwo.targetPos);
+            playerGraphicsSprite.color = c;
         }
     }
 
@@ -119,6 +166,7 @@ public class Player : MonoBehaviour , ICollidable
     void RestartAttack()
     {
         onAttack = false;
+        ChangeType();
     }
 
     public void TakeDamage()

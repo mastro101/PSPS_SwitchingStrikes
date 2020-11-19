@@ -12,7 +12,22 @@ public class PoolManager : ScriptableObject
     PoolableContainer[] poolables;
     bool spawned;
 
+    private void OnValidate()
+    {
+        SetPoolable();
+    }
+
     private void OnEnable()
+    {
+        SetPoolable();
+    }
+
+    private void OnDisable()
+    {
+        spawned = false;
+    }
+
+    void SetPoolable()
     {
         if (serializePoolable)
         {
@@ -20,11 +35,6 @@ public class PoolManager : ScriptableObject
             if (poolablePrefab != null)
                 poolablePrefab.poolManager = this;
         }
-    }
-
-    private void OnDisable()
-    {
-        spawned = false;
     }
 
     public void SpawnObjs()

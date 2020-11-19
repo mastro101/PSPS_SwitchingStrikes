@@ -9,11 +9,13 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] GenericPoolableObject poolable = null;
     [Space]
-    [SerializeField] EnemyType type;
+    [SerializeField] EnemyType _type = null;
     [SerializeField] float minSpeed = 0.1f;
     [SerializeField] float maxSpeed = 10f;
     [SerializeField] int minLife = 1;
     [SerializeField] int maxLife = 3;
+
+    public EnemyType type { get => _type; }
 
     #region Event
     [SerializeField] UnityEvent<Player, int> OnDamageUE = null;
@@ -31,7 +33,7 @@ public class Enemy : MonoBehaviour
     public float currentSpeed {
         get => _currentSpeed;
         set {
-            //do math based on difficult
+            //TODO: do math based on difficult
 
             if (value < minSpeed) _currentSpeed = minSpeed;
             else if (value > maxSpeed) _currentSpeed = maxSpeed;
@@ -41,12 +43,12 @@ public class Enemy : MonoBehaviour
         } 
     }
 
-    [SerializeField] int _startLife;
+    [SerializeField] int _startLife = 1;
     public int startLife {
         get => _startLife;
         private set
         {
-            //do math based on difficult
+            //TODO: do math based on difficult
 
             if (value < minLife) _startLife = minLife;
             else if (value > maxLife) _startLife = maxLife;
@@ -81,10 +83,4 @@ public class Enemy : MonoBehaviour
     {
         poolable.Destroy();
     }
-}
-
-public enum EnemyType
-{
-    Blue,
-    Red,
 }

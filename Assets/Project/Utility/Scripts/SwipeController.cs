@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,6 +23,7 @@ public class SwipeController : MonoBehaviour
     [SerializeField] UnityEvent OnStartTouchUE = null;
     [SerializeField] UnityEvent OnTouchAndRealeseUE = null;
     [SerializeField] UnityEvent OnEndTouchUE = null;
+    [SerializeField] TextMeshProUGUI swipeTextDebug;
 
     public Action OnStartTouch;
     public Action<SwipeData> OnSwipe;
@@ -54,15 +56,17 @@ public class SwipeController : MonoBehaviour
 
     public void SwipeHandlerTouch()
     {
-        foreach (Touch t in Input.touches)
+        for (int i = 0; i < Input.touchCount; i++)
         {
+            Touch t = Input.GetTouch(i);
+
             if (t.phase == TouchPhase.Began)
             {
                 swiped = false;
             }
 
             if (oneSwipeForTouch && swiped)
-                break;
+                return;
 
             if (t.phase == TouchPhase.Began)
             {
@@ -78,10 +82,10 @@ public class SwipeController : MonoBehaviour
                 //CheckPressTime();
             }
 
-            if (t.phase == TouchPhase.Moved && swipeOnRealese)
+            if ((t.phase == TouchPhase.Moved || t.phase == TouchPhase.Stationary) && swipeOnRealese)
             {
-                DetectSwipe();
                 positionTouch = t.position;
+                DetectSwipe();
             }
 
             if (t.phase == TouchPhase.Ended)
@@ -94,13 +98,63 @@ public class SwipeController : MonoBehaviour
                     if (canTap)
                     {
                         OnTouchAndRealese?.Invoke();
-                        OnTouchAndRealeseUE?.Invoke(); 
+                        OnTouchAndRealeseUE?.Invoke();
                     }
                 }
             }
 
             oldTouchPos = t.position;
         }
+
+        //foreach (Touch t in Input.touches)
+        //{
+        //    if (t.phase == TouchPhase.Began)
+        //    {
+        //        swiped = false;
+        //    }
+
+        //    if (oneSwipeForTouch && swiped)
+        //        return;
+
+        //    if (t.phase == TouchPhase.Began)
+        //    {
+        //        canTap = true;
+        //        if (timeForTouchAndRealese > 0)
+        //        {
+        //            CheckPressTime();
+        //        }
+        //        OnStartTouch?.Invoke();
+        //        OnStartTouchUE?.Invoke();
+        //        startTouchPos = t.position;
+        //        oldTouchPos = startTouchPos;
+        //        //CheckPressTime();
+        //    }
+
+        //    if ((t.phase == TouchPhase.Moved || t.phase == TouchPhase.Stationary) && swipeOnRealese)
+        //    {
+        //        positionTouch = t.position;
+        //        DetectSwipe();
+        //    }
+
+        //    if (t.phase == TouchPhase.Ended)
+        //    {
+        //        DetectSwipe();
+        //        OnEndTouchUE?.Invoke();
+        //        OnEndTouch?.Invoke();
+        //        if (!swiped)
+        //        {
+        //            if (canTap)
+        //            {
+        //                OnTouchAndRealese?.Invoke();
+        //                OnTouchAndRealeseUE?.Invoke(); 
+        //            }
+        //        }
+        //    }
+
+        //    oldTouchPos = t.position;
+        //}
+
+        swipeTextDebug.text = positionTouch.ToString();
     }
     
     public void SwipeHandlerClick()
