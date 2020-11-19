@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] Enemy enemy = null;
     [SerializeField] float minTime = 1;
     [SerializeField] float maxTime = 2;
+    [SerializeField] float offsetFromVertex = 0;
 
     CorutineOnSingleWork spawnCorutine;
 
@@ -44,8 +45,10 @@ public class Spawner : MonoBehaviour
             float s = Random.Range(minTime, maxTime);
             yield return new WaitForSeconds(s);
             int l = polygon.GetVertexPositions().Count;
-            Vector3 v = polygon.GetVertexPositions(Random.Range(1, l));
-            Spawn(v, Quaternion.LookRotation(Vector3.forward, v * -1));
+            int r = Random.Range(1, l);
+            Vector3 v = polygon.GetVertexPositions(r);
+            Vector3 vDir = v.normalized;
+            Spawn(v + (vDir * offsetFromVertex), Quaternion.LookRotation(Vector3.forward, v * -1));
         }
     }
 }

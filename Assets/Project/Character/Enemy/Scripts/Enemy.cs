@@ -15,13 +15,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] int minLife = 1;
     [SerializeField] int maxLife = 3;
 
+    #region Event
     [SerializeField] UnityEvent<Player, int> OnDamageUE = null;
     public Action<int> OnDamage;
     void InvokeOnDamage(Player p, int i) { OnDamage?.Invoke(i); OnDamageUE?.Invoke(p, i); }
-    
+
     [SerializeField] UnityEvent OnDeathUE = null;
     public Action OnDeath;
-    void InvokeOnDeath() { OnDeath?.Invoke(); OnDeathUE?.Invoke(); }
+    void InvokeOnDeath() { OnDeath?.Invoke(); OnDeathUE?.Invoke(); } 
+    #endregion
 
     int currentLife;
 
@@ -62,6 +64,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(Player player, int i = 1)
     {
         currentLife -= i;
+        player.score.Add(i);
         if (currentLife > 0)
             InvokeOnDamage(player, i);
         else
