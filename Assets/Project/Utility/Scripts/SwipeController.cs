@@ -82,7 +82,7 @@ public class SwipeController : MonoBehaviour
                 //CheckPressTime();
             }
 
-            if ((t.phase == TouchPhase.Moved || t.phase == TouchPhase.Stationary) && swipeOnRealese)
+            if (t.phase != TouchPhase.Ended && t.phase != TouchPhase.Canceled)
             {
                 positionTouch = t.position;
                 DetectSwipe();
