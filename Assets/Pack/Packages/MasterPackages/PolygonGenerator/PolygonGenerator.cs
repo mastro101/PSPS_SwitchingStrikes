@@ -25,6 +25,8 @@ public class PolygonGenerator : MonoBehaviour
     [SerializeField][HideInInspector] Transform[] bones;
     [SerializeField][HideInInspector] Matrix4x4[] bindPoses;
 
+    [SerializeField][HideInInspector] float generateRadius;
+
     private void OnDestroy()
     {
         Destroy();
@@ -165,6 +167,8 @@ public class PolygonGenerator : MonoBehaviour
 
         smr.sharedMesh = mesh;
 
+        generateRadius = radius;
+
         OnGenerate?.Invoke();
     }
 
@@ -180,6 +184,11 @@ public class PolygonGenerator : MonoBehaviour
 
         Debug.LogWarning("index " + i + " is not in the list");
         return Vector3.zero;
+    }
+
+    public float GetRadius()
+    {
+        return generateRadius;
     }
 
     enum axe

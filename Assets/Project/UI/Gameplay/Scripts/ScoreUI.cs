@@ -5,12 +5,15 @@ using TMPro;
 
 public class ScoreUI : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI text = null;
+    [SerializeField] TextMeshProUGUI bestScoreText = null;
+    [SerializeField] TextMeshProUGUI actualScoretext = null;
     [SerializeField] FloatData score = null;
+    [SerializeField] FloatData bestScore = null;
 
     private void Awake()
     {
-        text.text = 0.ToString();
+        actualScoretext.text = 0.ToString();
+        bestScoreText.text = bestScore.GetValue().ToString();
         if (score)
         {
             SetText(score.value);
@@ -18,10 +21,13 @@ public class ScoreUI : MonoBehaviour
         }
     }
 
-
-
     void SetText(float f)
     {
-        text.text = f.ToString();
+        actualScoretext.text = f.ToString();
+        if (f > bestScore.value)
+        {
+            bestScore.SetValue(f);
+            bestScoreText.text = bestScore.value.ToString();
+        }
     }
 }

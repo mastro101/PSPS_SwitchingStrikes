@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class Player : MonoBehaviour , ICollidable
 {
@@ -10,17 +11,19 @@ public class Player : MonoBehaviour , ICollidable
     [SerializeField] Transform playerGraphics = null;
     [Space]
     [SerializeField] float startLife = 1f;
-
+    [SerializeField] float speed = 0.5f;
+    [Space]
     [SerializeField] EnemyTypeArrey _enemyTypeArrey;
     EnemyTypeArrey enemyTypeArrey { get => _enemyTypeArrey; set { _enemyTypeArrey = value; typeCount = _enemyTypeArrey.enemyTypes.Length; } }
     EnemyType currentType;
 
-    public FloatData score;
+    public FloatData actualScore;
 
     List<AttackDirection> possibleAttackDirection;
     float currentLife;
     SpriteRenderer playerGraphicsSprite;
 
+    Tween attackTween;
 
     public CollisionEvent collisionEvent { get; private set; }
 
@@ -36,6 +39,7 @@ public class Player : MonoBehaviour , ICollidable
         activeCollide = true;
         playerGraphicsSprite = playerGraphics.GetComponent<SpriteRenderer>();
         typeCount = _enemyTypeArrey.enemyTypes.Length;
+        SetupData();
     }
 
     private void Start()
@@ -60,15 +64,20 @@ public class Player : MonoBehaviour , ICollidable
             if (enemy)
             {
                 if (enemy.type.type == currentType.type)
+                {
                     enemy.TakeDamage(this);
+                    attackTween.Kill();
+                    EndAttack();
+                }
             }
         }
     }
     #endregion
 
-    public void Setup()
+    public void SetupData()
     {
         currentLife = startLife;
+        actualScore.SetValue(0);
     }
 
     void SetAttackDirection()
@@ -159,9 +168,16 @@ public class Player : MonoBehaviour , ICollidable
         if(!onAttack)
         {
             onAttack = true;
-            playerGraphics.DOMove(v, 0.2f).SetLoops(2, LoopType.Yoyo).OnComplete(RestartAttack);
+            attackTween = playerGraphics.DOMove(v, PhysicsUtility.TimeFromSpaceAndVelocity(v.magnitude, speed)).OnComplete(EndAttack);
+            attackTween.Play();
         }
     }
+
+    void EndAttack()
+    {
+        Vector3 target = polygonGenerator.GetVertexPositions(0);
+        playerGraphics.DOMove(target, PhysicsUtility.TimeFromSpaceAndVelocity(polygonGenerator.GetRadius(), speed)).OnComplete(RestartAttack);
+    }    
 
     void RestartAttack()
     {
@@ -169,9 +185,17 @@ public class Player : MonoBehaviour , ICollidable
         ChangeType();
     }
 
-    public void TakeDamage()
+    public void TakeDamage(Enemy enemy)
     {
+        enemy.Destroy();
         currentLife--;
+        if (currentLife <= 0)
+            Death();
+    }
+
+    void Death()
+    {
+        SceneNavigation.ReloadScene();
     }
 
     class AttackDirection

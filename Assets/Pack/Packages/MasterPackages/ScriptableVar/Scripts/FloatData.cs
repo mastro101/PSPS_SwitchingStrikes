@@ -7,6 +7,6 @@ public class FloatData : ScriptableVar<float>
 {
     public void Add(float f)
     {
-        value += f;
+        SetValue(value + f);
     }
 }

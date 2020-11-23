@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(Player player, int i = 1)
     {
         currentLife -= i;
-        player.score.Add(i);
+        player.actualScore.Add(i);
         if (currentLife > 0)
             InvokeOnDamage(player, i);
         else
@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
         Destroy();
     }
 
-    void Destroy()
+    public void Destroy()
     {
         poolable.Destroy();
     }

@@ -5,22 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class SceneNavigation : MonoBehaviour
 {
-    public void ChangeScene(string _name)
+    public static void ChangeScene(string _name)
     {
         SceneManager.LoadScene(_name);
     }
 
-    public void ChangeScene(int _index)
+    public static void ChangeScene(int _index)
     {
         SceneManager.LoadScene(_index);
     }
 
-    public void ReloadScene()
+    public static void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void QuitGame()
+    public static void QuitGame()
     {
         Application.Quit();
     }

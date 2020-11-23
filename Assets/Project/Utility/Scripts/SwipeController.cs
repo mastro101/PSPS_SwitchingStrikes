@@ -23,7 +23,7 @@ public class SwipeController : MonoBehaviour
     [SerializeField] UnityEvent OnStartTouchUE = null;
     [SerializeField] UnityEvent OnTouchAndRealeseUE = null;
     [SerializeField] UnityEvent OnEndTouchUE = null;
-    [SerializeField] TextMeshProUGUI swipeTextDebug;
+    [SerializeField] TextMeshProUGUI swipeTextDebug = null;
 
     public Action OnStartTouch;
     public Action<SwipeData> OnSwipe;
@@ -103,7 +103,8 @@ public class SwipeController : MonoBehaviour
                 }
             }
 
-            oldTouchPos = t.position;
+            if (t.phase != TouchPhase.Ended && t.phase != TouchPhase.Canceled)
+                oldTouchPos = t.position;
         }
 
         //foreach (Touch t in Input.touches)
@@ -203,7 +204,8 @@ public class SwipeController : MonoBehaviour
             }
         }
 
-        oldTouchPos = Input.mousePosition;
+        if (Input.GetMouseButton(0))
+            oldTouchPos = Input.mousePosition;
     }
 
     void DetectSwipe()

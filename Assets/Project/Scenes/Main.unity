@@ -679,7 +679,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5083278723145079022, guid: fceafa63efb3a764ca7064b0ab9d4967, type: 3}
+      - m_Target: {fileID: 2442263594570688593, guid: fceafa63efb3a764ca7064b0ab9d4967, type: 3}
         m_TargetAssemblyTypeName: SceneNavigation, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 5

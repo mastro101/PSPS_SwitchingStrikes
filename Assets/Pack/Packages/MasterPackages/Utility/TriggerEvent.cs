@@ -5,39 +5,39 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
-public class TriggerEvent : MonoBehaviour
+public class TriggerEvent<T> : MonoBehaviour
 {
-    [SerializeField] string classNameToTrigger = null;
-    [Space]
-    [SerializeField] UnityEvent OnEnterTrigger = null;
-    [SerializeField] UnityEvent OnTrigger = null;
-    [SerializeField] UnityEvent OnExitTrigger = null;
+    [SerializeField] UnityEvent<T> OnEnterTrigger = null;
+    [SerializeField] UnityEvent<T> OnTrigger = null;
+    [SerializeField] UnityEvent<T> OnExitTrigger = null;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (checkComponent(other))
-            OnEnterTrigger?.Invoke();
+        CheckComponent(other, OnEnterTrigger);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (checkComponent(other))
-            OnTrigger?.Invoke();
+        CheckComponent(other, OnTrigger);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (checkComponent(other))
-            OnExitTrigger?.Invoke();
+        CheckComponent(other, OnExitTrigger);
     }
 
-    bool checkComponent(Collider c)
+    void InvokeEvent(UnityEvent<T> ue, T t)
     {
-        var cl = c.GetComponent(classNameToTrigger);
+        ue?.Invoke(t);
+    }
+
+    void CheckComponent(Collider c, UnityEvent<T> ue)
+    {
+        T cl = c.GetComponent<T>();
 
         if (cl == null)
-            return false;
+            return;
         else
-            return true;
+            InvokeEvent(ue, cl);
     }
 }

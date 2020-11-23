@@ -8,26 +8,21 @@ public class PoolManager : ScriptableObject
 {
     [SerializeField] int nObj = 10;
     [SerializeField] [HideInInspector] GameObject serializePoolable = null;
-    public IPoolable poolablePrefab;
+    [SerializeField] IPoolable poolablePrefab;
     PoolableContainer[] poolables;
     bool spawned;
-
-    private void OnValidate()
-    {
-        SetPoolable();
-    }
 
     private void OnEnable()
     {
         SetPoolable();
     }
 
-    private void OnDisable()
+    public IPoolable GetPoolablePrefab()
     {
-        spawned = false;
+        return poolablePrefab;
     }
 
-    void SetPoolable()
+    public void SetPoolable()
     {
         if (serializePoolable)
         {
