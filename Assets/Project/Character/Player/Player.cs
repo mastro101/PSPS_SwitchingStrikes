@@ -24,6 +24,7 @@ public class Player : MonoBehaviour , ICollidable
     SpriteRenderer playerGraphicsSprite;
 
     Tween attackTween;
+    Tween endAttack;
 
     public CollisionEvent collisionEvent { get; private set; }
 
@@ -53,6 +54,8 @@ public class Player : MonoBehaviour , ICollidable
         polygonGenerator.OnGenerate -= SetAttackDirection;
         swipeController.OnSwipe -= CheckSwipe;
         swipeController.OnTouchAndRealese -= ChangeType;
+        attackTween.Kill();
+        endAttack.Kill();
         activeCollide = false;
     }
 
@@ -100,10 +103,17 @@ public class Player : MonoBehaviour , ICollidable
             {
                 tempAttDirOne = possibleAttackDirection[i];
                 angleOne = tempAttDirOne.angle;
+
+                if (i == 0 && swipeAngle < angleOne)
+                {
+                    Attack(tempAttDirOne.targetPos);
+                    return;
+                }
+
                 if (i == possibleAttackDirection.Count - 1)
                 {
                     tempAttDirTwo = possibleAttackDirection[0];
-                    angleTwo = 360f;
+                    angleTwo = tempAttDirTwo.angle + 360;
                 }
                 else
                 {
@@ -111,17 +121,19 @@ public class Player : MonoBehaviour , ICollidable
                     angleTwo = tempAttDirTwo.angle;
                 }
 
-                if (swipeAngle > tempAttDirOne.angle && swipeAngle < tempAttDirTwo.angle)
+                if (swipeAngle >= tempAttDirOne.angle && swipeAngle <= tempAttDirTwo.angle)
                 {
                     break;
                 }
             }
 
-            if (swipeAngle - tempAttDirOne.angle <= tempAttDirTwo.angle - swipeAngle)
+            float distanceOne = swipeAngle - angleOne, distanceTwo = angleTwo - swipeAngle;
+
+            if (distanceOne <= distanceTwo)
             {
                 Attack(tempAttDirOne.targetPos);
             }
-            else if (swipeAngle - tempAttDirOne.angle > tempAttDirTwo.angle - swipeAngle)
+            else if (distanceOne > distanceTwo)
             {
                 Attack(tempAttDirTwo.targetPos);
             }
@@ -176,7 +188,7 @@ public class Player : MonoBehaviour , ICollidable
     void EndAttack()
     {
         Vector3 target = polygonGenerator.GetVertexPositions(0);
-        playerGraphics.DOMove(target, PhysicsUtility.TimeFromSpaceAndVelocity(polygonGenerator.GetRadius(), speed)).OnComplete(RestartAttack);
+        endAttack = playerGraphics.DOMove(target, PhysicsUtility.TimeFromSpaceAndVelocity(polygonGenerator.GetRadius(), speed)).OnComplete(RestartAttack);
     }    
 
     void RestartAttack()

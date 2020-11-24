@@ -14,7 +14,7 @@ public class SwipeController : MonoBehaviour
     [Space]
     [Header("Swipe")]
     [SerializeField] bool oneSwipeForTouch = true;
-    [SerializeField] bool swipeOnRealese = false;
+    //[SerializeField] bool swipeOnRealese = false;
     [SerializeField] float minDistance = 0.2f;
     [SerializeField] UnityEvent<SwipeData> OnSwipeUE = null;
     [Space]
@@ -41,7 +41,6 @@ public class SwipeController : MonoBehaviour
     Vector2 oldTouchPos = Vector2.zero;
 
     Vector2 swipeVector = Vector2.zero;
-    Vector2 swipeDirection = Vector2.zero;
 
     private void Update()
     {
@@ -214,7 +213,6 @@ public class SwipeController : MonoBehaviour
         swipeMagnitude = swipeVector.magnitude;
         if (swipeMagnitude > minDistance)
         {
-            swipeDirection = swipeVector.normalized;
             swiped = true;
             OnSwipe?.Invoke(new SwipeData(swipeVector));
             OnSwipeUE?.Invoke(new SwipeData(swipeVector));
