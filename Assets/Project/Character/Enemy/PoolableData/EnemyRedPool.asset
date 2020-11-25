@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemyRedPool
   m_EditorClassIdentifier: 
   nObj: 10
-  serializePoolable: {fileID: 8668988917063857014, guid: 35e03be82c5b0024698904b083248692, type: 3}
+  serializePoolable: {fileID: 7057241609778965664, guid: 35e03be82c5b0024698904b083248692, type: 3}

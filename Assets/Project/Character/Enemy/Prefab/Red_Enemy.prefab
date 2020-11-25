@@ -71,6 +71,14 @@ PrefabInstance:
       propertyPath: _type
       value: 
       objectReference: {fileID: 11400000, guid: 00c8e2a47b009f8479fe5a96408a9d85, type: 2}
+    - target: {fileID: 8668988917063857013, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
+      propertyPath: maxLife
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668988917063857013, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
+      propertyPath: _startLife
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8668988917063857014, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Name
       value: Red_Enemy

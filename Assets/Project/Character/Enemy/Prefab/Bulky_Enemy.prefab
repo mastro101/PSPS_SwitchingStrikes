@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4268282541231306323
+--- !u!1001 &6844093601430764189
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,18 +10,18 @@ PrefabInstance:
     - target: {fileID: -7794911249360255216, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: edbc05dd3a4de784191750f2d52b7e35, type: 3}
+      objectReference: {fileID: 21300000, guid: 5d2a0a923f2f0d344834d7c623640063, type: 3}
     - target: {fileID: -7794911249360255216, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7794911249360255216, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Color.g
-      value: 0.24429876
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7794911249360255216, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Color.b
-      value: 0.990566
+      value: 0.82608795
       objectReference: {fileID: 0}
     - target: {fileID: 8668988917063857012, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -68,16 +68,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8668988917063857013, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
-      propertyPath: maxLife
-      value: 1
+      propertyPath: _startLife
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8668988917063857013, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
-      propertyPath: _startLife
-      value: 1
+      propertyPath: maxLife
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8668988917063857013, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
+      propertyPath: maxSpeed
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668988917063857013, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
+      propertyPath: _type
+      value: 
+      objectReference: {fileID: 11400000, guid: 3182e89306444544294628689f9f9c93, type: 2}
     - target: {fileID: 8668988917063857014, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Name
-      value: Blue_Enemy
+      value: Bulky_Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
