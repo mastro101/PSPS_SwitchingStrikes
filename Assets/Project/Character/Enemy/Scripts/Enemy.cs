@@ -58,9 +58,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void Setup(int life)
+    {
+        currentLife = life;
+    }
+
     public void Spawn(Vector2 pos, Quaternion rot)
     {
-        poolable.Take(pos, rot);
+        poolable.Take(pos, rot).gameObject.GetComponent<Enemy>().Setup(startLife);
     }
 
     public void TakeDamage(Player player, int i = 1)
