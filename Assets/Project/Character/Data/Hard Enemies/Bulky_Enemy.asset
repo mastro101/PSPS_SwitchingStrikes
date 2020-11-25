@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e5b1943bd367f4468887dce0996d597, type: 3}
-  m_Name: RedEnemy
+  m_Name: Bulky_Enemy
   m_EditorClassIdentifier: 
-  enemyPoolManager: {fileID: 11400000, guid: a5bfbec4f2c291f4ebecb45e2e8f9b79, type: 2}
+  enemyPoolManager: {fileID: 11400000, guid: 39e66774a6995ab48b327d12c3f66229, type: 2}
   type: 1
-  color: {r: 1, g: 0, b: 0, a: 1}
-  enemyPrefab: {fileID: 8668988917063857013, guid: 35e03be82c5b0024698904b083248692, type: 3}
+  color: {r: 1, g: 0, b: 0.9020295, a: 1}
+  enemyPrefab: {fileID: 2789264887462644200, guid: 7c1b6e5a03833f34a88d70470e4c50ee, type: 3}

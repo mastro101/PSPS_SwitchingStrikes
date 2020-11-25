@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: _type
       value: 
       objectReference: {fileID: 11400000, guid: 3182e89306444544294628689f9f9c93, type: 2}
+    - target: {fileID: 8668988917063857013, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
+      propertyPath: minLife
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8668988917063857014, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Name
       value: Bulky_Enemy

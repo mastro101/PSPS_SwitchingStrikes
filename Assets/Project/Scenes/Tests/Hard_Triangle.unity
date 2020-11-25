@@ -1092,7 +1092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   polygon: {fileID: 876959474}
-  enemies: {fileID: 11400000, guid: b4332b4611293d149a1e358a6e2e1949, type: 2}
+  enemies: {fileID: 11400000, guid: b2821bea50bc57b47b97a33ff97e2f4f, type: 2}
   minTime: 0.5
   maxTime: 2
   offsetFromVertex: 2
@@ -1760,7 +1760,7 @@ MonoBehaviour:
   playerGraphics: {fileID: 2141328976}
   startLife: 1
   speed: 8
-  _enemyTypeArrey: {fileID: 11400000, guid: b4332b4611293d149a1e358a6e2e1949, type: 2}
+  _enemyTypeArrey: {fileID: 11400000, guid: b2821bea50bc57b47b97a33ff97e2f4f, type: 2}
   actualScore: {fileID: 11400000, guid: 5436b39efa940da4c876a57fdd27dfcc, type: 2}
 --- !u!54 &2098644972
 Rigidbody:
