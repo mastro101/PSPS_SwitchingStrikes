@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class GenericStartEvent : MonoBehaviour
 {
-    [SerializeField] UnityEvent OnStart;
+    [SerializeField] UnityEvent OnStart = null;
 
     private void Start()
     {

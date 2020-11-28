@@ -6,18 +6,23 @@ public static class MathUtility
 {
     public static int TakeADecimal(float f, int index)
     {
-        return (int)((index * Mathf.Pow(10f, index)) % 10f);
+        //if (f % 1 == 0)
+        //    return 0;
+        return (int)((f * Mathf.Pow(10f, index)) % 10f);
     }
 
     public static float Approximation(float f, int numberOfDecimal)
     {
-        if (f == 0)
-            return 0;
-        float pow = Mathf.Pow(10, (float)numberOfDecimal);
-        float fNoComma = f * pow;
-        float round = Mathf.Round(fNoComma);
-        float newF = ((round % pow) / pow) + (int)f;
-        Debug.LogFormat("approximetion of {0} with {1} decimal = {2}", f, numberOfDecimal, newF);
+        if (f % 1 == 0)
+            return f;
+        if (numberOfDecimal < 0)
+        {
+            Debug.LogError("number of decimal must be positive");
+            return f;
+        }
+        float pow = Mathf.Pow(10f, (float)numberOfDecimal);
+        float fInt = Mathf.Round(f * pow);
+        float newF = ((fInt % pow) / pow) + (int)f;
         return newF;
     }
 }

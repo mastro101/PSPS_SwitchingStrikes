@@ -40,17 +40,13 @@ public static class VectorUtility
         return new Vector3(_vector2.y, y, _vector2.x);
     }
 
-    public static Vector3 NormalizeWithPrecision(Vector3 _vector3, int _decimal)
-    {
-        float x = _vector3.x, y = _vector3.y, z = _vector3.z;
-        Vector3 v = _vector3 / Mathf.Sqrt(x * x + y * y + z * z);
-        Vector3 normal = Approximation(v, _decimal);
-        Debug.LogFormat("Normal of {0} with {1} decimal = {2}", _vector3, _decimal, normal);
-        return normal;
-    }
-
     public static Vector3 Approximation(Vector3 _vector3, int _decimal)
     {
         return new Vector3(MathUtility.Approximation(_vector3.x, _decimal), MathUtility.Approximation(_vector3.y, _decimal), MathUtility.Approximation(_vector3.z, _decimal));
+    }
+    
+    public static Vector2 Approximation(Vector2 _vector2, int _decimal)
+    {
+        return new Vector2(MathUtility.Approximation(_vector2.x, _decimal), MathUtility.Approximation(_vector2.y, _decimal));
     }
 }

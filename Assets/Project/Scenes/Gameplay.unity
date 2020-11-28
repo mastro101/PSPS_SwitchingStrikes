@@ -1820,6 +1820,14 @@ PrefabInstance:
       propertyPath: swipeTextDebug
       value: 
       objectReference: {fileID: 115872715}
+    - target: {fileID: 2872037720180407896, guid: f27e45bd8a17c80458430d5b51d19f16, type: 3}
+      propertyPath: mouse
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872037720180407896, guid: f27e45bd8a17c80458430d5b51d19f16, type: 3}
+      propertyPath: touch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2872037720180407897, guid: f27e45bd8a17c80458430d5b51d19f16, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
