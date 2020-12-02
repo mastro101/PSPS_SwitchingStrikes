@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9337eef035d3aa34a87de35dceb6d107, type: 3}
-  m_Name: FastEnemy
+  m_Name: B_FastEnemy
   m_EditorClassIdentifier: 
   nObj: 10
-  serializePoolable: {fileID: 8206611289390713921, guid: f539861cc7cd1824f9000d6adfdaac36, type: 3}
+  serializePoolable: {fileID: 8179356949573800353, guid: ae82bb21a0b8c2540a28eddd80dcacf8, type: 3}
