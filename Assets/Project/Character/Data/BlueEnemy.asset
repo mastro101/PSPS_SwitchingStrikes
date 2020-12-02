@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5b1943bd367f4468887dce0996d597, type: 3}
   m_Name: BlueEnemy
   m_EditorClassIdentifier: 
-  enemyPoolManager: {fileID: 11400000, guid: 39e66774a6995ab48b327d12c3f66229, type: 2}
+  enemyPoolManager: {fileID: 11400000, guid: ef0a67ff8aa8a9546917d911c922850f, type: 2}
   type: 0
   color: {r: 0, g: 0, b: 1, a: 1}
-  enemyPrefab: {fileID: 8668988917063857013, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
+  enemyPrefab: {fileID: 4860953165248611622, guid: c0a4fa214847df048903fc03fa8bf480, type: 3}
