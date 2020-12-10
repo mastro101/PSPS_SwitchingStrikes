@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] int minLife = 1;
     [SerializeField] int maxLife = 3;
 
+    Enemy instance;
+
     public EnemyType type { get => _type; }
 
     #region Event
@@ -65,16 +67,16 @@ public class Enemy : MonoBehaviour
 
     public void Spawn(Vector2 pos, Quaternion rot)
     {
-        poolable.Take(pos, rot).gameObject.GetComponent<Enemy>().Setup(startLife);
+        instance = poolable.Take(pos, rot).gameObject.GetComponent<Enemy>();
+        instance.Setup(startLife);
     }
 
     public void TakeDamage(Player player, int i = 1)
     {
         currentLife -= i;
         player.actualScore.Add(i);
-        if (currentLife > 0)
-            InvokeOnDamage(player, i);
-        else
+        InvokeOnDamage(player, i);
+        if (currentLife <= 0)
             Death();
     }
 

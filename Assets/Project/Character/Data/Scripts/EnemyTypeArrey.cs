@@ -6,13 +6,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyTypeArrey", menuName = "Scriptable/Enemy/Arrey")]
 public class EnemyTypeArrey : ScriptableObject
 {
-    public EnemyType[] enemyTypes;
+    [SerializeField] PoolManager[] enemyPoolManager = null;
+    [HideInInspector] public Enemy[] enemies;
 
-    private void OnEnable()
+    public void Setup()
     {
-        for (int i = 0; i < enemyTypes.Length; i++)
+        enemies = new Enemy[enemyPoolManager.Length];
+        for (int i = 0; i < enemyPoolManager.Length; i++)
         {
-            enemyTypes[i].Setup();
+            if (enemyPoolManager[i])
+            {
+                enemyPoolManager[i].SetPoolable();
+                enemies[i] = enemyPoolManager[i].GetPoolablePrefab().gameObject.GetComponent<Enemy>();
+            }
         }
     }
 }

@@ -6,15 +6,19 @@ using System;
 
 public class Player : MonoBehaviour , ICollidable
 {
+    [SerializeField] PlayerVar playerInstance;
+    [Space]
     [SerializeField] SwipeController swipeController = null;
-    [SerializeField] PolygonGenerator polygonGenerator = null;
     [SerializeField] Transform playerGraphics = null;
     [Space]
     [SerializeField] float startLife = 1f;
     [SerializeField] float speed = 0.5f;
-    [Space]
-    [SerializeField] EnemyTypeArrey _enemyTypeArrey;
-    EnemyTypeArrey enemyTypeArrey { get => _enemyTypeArrey; set { _enemyTypeArrey = value; typeCount = _enemyTypeArrey.enemyTypes.Length; } }
+    
+    PolygonGenerator polygonGenerator = null;
+
+    EnemyTypeArrey _enemyTypeArrey;
+    EnemyTypeArrey enemyTypeArrey { get => _enemyTypeArrey; set { _enemyTypeArrey = value; SetPossibleType(); } }
+    List<EnemyType> possibleType;
     EnemyType currentType;
 
     public FloatData actualScore;
@@ -30,33 +34,36 @@ public class Player : MonoBehaviour , ICollidable
 
     public bool activeCollide { get; private set; }
 
+    #region Event
+
+    #endregion
+
     #region Mono
-    private void OnEnable()
+    private void Awake()
     {
-        collisionEvent = new CollisionEvent(TriggerEnter, null, null, null, null, null);
-        polygonGenerator.OnGenerate += SetAttackDirection;
-        swipeController.OnSwipe += CheckSwipe;
-        swipeController.OnTouchAndRealese += ChangeType;
-        activeCollide = true;
-        playerGraphicsSprite = playerGraphics.GetComponent<SpriteRenderer>();
-        typeCount = _enemyTypeArrey.enemyTypes.Length;
-        SetupData();
+        playerInstance.SetValue(this);
     }
 
-    private void Start()
-    {
-        SetAttackDirection();
-        ChangeType();
-    }
+    //private void OnEnable()
+    //{
+    //    collisionEvent = new CollisionEvent(TriggerEnter, null, null, null, null, null);
+    //    polygonGenerator.OnGenerate += SetAttackDirection;
+    //    swipeController.OnSwipe += CheckSwipe;
+    //    swipeController.OnTouchAndRealese += ChangeType;
+    //    activeCollide = true;
+    //    playerGraphicsSprite = playerGraphics.GetComponent<SpriteRenderer>();
+    //    typeCount = _enemyTypeArrey.enemies.Length;
+    //    SetupData();
+    //}
 
     private void OnDisable()
     {
-        polygonGenerator.OnGenerate -= SetAttackDirection;
-        swipeController.OnSwipe -= CheckSwipe;
-        swipeController.OnTouchAndRealese -= ChangeType;
+        //polygonGenerator.OnGenerate -= SetAttackDirection;
+        //swipeController.OnSwipe -= CheckSwipe;
+        //swipeController.OnTouchAndRealese -= ChangeType;
         attackTween.Kill();
         endAttack.Kill();
-        activeCollide = false;
+        //activeCollide = false;
     }
 
     void TriggerEnter(Collider other)
@@ -66,16 +73,40 @@ public class Player : MonoBehaviour , ICollidable
         {
             if (enemy)
             {
-                if (enemy.type.type == currentType.type)
+                if (enemy.type == currentType)
                 {
                     enemy.TakeDamage(this);
                     attackTween.Kill();
                     EndAttack();
                 }
+                else
+                {
+                    TakeDamage(enemy);
+                    attackTween.Kill();
+                    EndAttack();
+                    // Enemy.TakeDamege???
+                }
             }
         }
     }
     #endregion
+
+    public void Setup(PolygonGenerator pg, EnemyTypeArrey eta)
+    {
+        polygonGenerator = pg;
+        enemyTypeArrey = eta;
+        SetupData();
+        collisionEvent = new CollisionEvent(TriggerEnter, null, null, null, null, null);
+        polygonGenerator.OnGenerate += SetAttackDirection;
+        swipeController.OnSwipe += CheckSwipe;
+        swipeController.OnTouchAndRealese += ChangeType;
+        activeCollide = true;
+        playerGraphicsSprite = playerGraphics.GetComponentInChildren<SpriteRenderer>();
+        typeCount = _enemyTypeArrey.enemies.Length;
+        SetAttackDirection();
+        SetPossibleType();
+        ChangeType();
+    }
 
     public void SetupData()
     {
@@ -140,11 +171,24 @@ public class Player : MonoBehaviour , ICollidable
         }
     }
 
+    void SetPossibleType()
+    {
+        possibleType = new List<EnemyType>();
+        for (int i = 0; i < enemyTypeArrey.enemies.Length; i++)
+        {
+            EnemyType et = enemyTypeArrey.enemies[i].type;
+            if (possibleType.Contains(enemyTypeArrey.enemies[i].type))
+                continue;
+
+            possibleType.Add(et);
+        }
+    }
+
     int typeIndex;
     int typeCount;
     void ChangeType()
     {
-        currentType = enemyTypeArrey.enemyTypes[typeIndex];
+        currentType = possibleType[typeIndex];
         ChangeColor(currentType.color);
         typeIndex++;
         if (typeIndex >= typeCount)
@@ -153,9 +197,9 @@ public class Player : MonoBehaviour , ICollidable
     
     void ChangeType(int index)
     {
-        if (index >= 0 && index < enemyTypeArrey.enemyTypes.Length)
+        if (index >= 0 && index < possibleType.Count)
         {
-            currentType = enemyTypeArrey.enemyTypes[index];
+            currentType = possibleType[index];
             ChangeColor(currentType.color);
             typeIndex = index + 1;
             if (typeIndex >= typeCount)

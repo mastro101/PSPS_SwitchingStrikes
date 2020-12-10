@@ -28,7 +28,7 @@ public class PoolManager : ScriptableObject
         {
             poolablePrefab = serializePoolable.GetComponent<IPoolable>();
             if (poolablePrefab != null)
-                poolablePrefab.poolManager = this;
+                poolablePrefab.Setup(this);
         }
     }
 
@@ -41,9 +41,10 @@ public class PoolManager : ScriptableObject
         for (int i = 0; i < nObj; i++)
         {
             IPoolable tempObj = Instantiate(poolablePrefab.gameObject).GetComponent<IPoolable>();
-            tempObj.poolManager = this;
+            tempObj.Setup(this);
             poolables[i] = new PoolableContainer(tempObj, true);
             tempObj.gameObject.SetActive(false);
+            tempObj.OnInstantiate?.Invoke();
         }
         spawned = true;
     }

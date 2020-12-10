@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField] PlayerVar player;
     [SerializeField] PolygonGenerator polygon = null;
 
     [SerializeField] EnemyTypeArrey enemies = null;
@@ -13,12 +14,13 @@ public class Spawner : MonoBehaviour
 
     CorutineOnSingleWork spawnCorutine;
 
-    private void Awake()
+    private void Start()
     {
+        enemies.Setup();
         spawnCorutine = gameObject.AddComponent<CorutineOnSingleWork>().SetCorutine(SpawnCorutine());
-        for (int i = 0; i < enemies.enemyTypes.Length; i++)
+        for (int i = 0; i < enemies.enemies.Length; i++)
         {
-            GenericPoolableObject genericPoolableObject = enemies.enemyTypes[i].enemyPrefab.GetComponent<GenericPoolableObject>();
+            GenericPoolableObject genericPoolableObject = enemies.enemies[i].GetComponent<GenericPoolableObject>();
             if (genericPoolableObject)
             {
                 PoolManager p = genericPoolableObject.poolManager;
@@ -26,16 +28,13 @@ public class Spawner : MonoBehaviour
                     p.SpawnObjs();
             }
         }
-    }
-
-    private void Start()
-    {
+        player.GetValue().Setup(polygon, enemies);
         StartSpawn();
     }
 
     void Spawn(Vector3 pos, Quaternion rot)
     {
-        Enemy e = enemies.enemyTypes[Random.Range(0, enemies.enemyTypes.Length)].enemyPrefab;
+        Enemy e = enemies.enemies[Random.Range(0, enemies.enemies.Length)];
         e.Spawn(pos, rot);
     }
 

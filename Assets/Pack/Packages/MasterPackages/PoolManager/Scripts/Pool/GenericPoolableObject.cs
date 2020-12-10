@@ -5,9 +5,17 @@ using UnityEngine;
 
 public class GenericPoolableObject : MonoBehaviour, IPoolable
 {
-    public PoolManager poolManager { get; set; }
+    public PoolManager poolManager { get; private set; }
+    public Action OnInstantiate { get; set; }
 
+    public Action OnSetup;
     public Action OnSpawn;
+
+    public void Setup(PoolManager _poolManager)
+    {
+        poolManager = _poolManager;
+        OnSetup?.Invoke();
+    }
 
     public IPoolable Take(Vector3 pos, Quaternion rot)
     {
