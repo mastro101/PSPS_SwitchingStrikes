@@ -7,10 +7,11 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour , ICollidable
 {
-    [SerializeField] PlayerVar playerInstance;
+    [SerializeField] PlayerVar playerInstance = null;
     [Space]
     [SerializeField] SwipeController swipeController = null;
     [SerializeField] Transform playerGraphics = null;
+    [SerializeField] SpriteRenderer maskSprite = null;
     [Space]
     [SerializeField] float startLife = 1f;
     [SerializeField] float speed = 0.5f;
@@ -29,7 +30,6 @@ public class Player : MonoBehaviour , ICollidable
 
     List<AttackDirection> possibleAttackDirection;
     float currentLife;
-    SpriteRenderer playerGraphicsSprite;
 
     Tween attackTween;
     Tween endAttack;
@@ -37,10 +37,6 @@ public class Player : MonoBehaviour , ICollidable
     public CollisionEvent collisionEvent { get; private set; }
 
     public bool activeCollide { get; private set; }
-
-    #region Event
-
-    #endregion
 
     #region Mono
     private void Awake()
@@ -105,7 +101,6 @@ public class Player : MonoBehaviour , ICollidable
         swipeController.OnSwipe += CheckSwipe;
         swipeController.OnTouchAndRealese += ChangeType;
         activeCollide = true;
-        playerGraphicsSprite = playerGraphics.GetComponentInChildren<SpriteRenderer>();
         typeCount = _enemyTypeArrey.enemies.Length;
         SetAttackDirection();
         SetPossibleType();
@@ -193,7 +188,7 @@ public class Player : MonoBehaviour , ICollidable
     void ChangeType()
     {
         currentType = possibleType[typeIndex];
-        ChangeColor(currentType.color);
+        ChangeMask(currentType.playerMaskSprite, currentType.color);
         typeIndex++;
         if (typeIndex >= typeCount)
             typeIndex = 0;
@@ -204,7 +199,7 @@ public class Player : MonoBehaviour , ICollidable
         if (index >= 0 && index < possibleType.Count)
         {
             currentType = possibleType[index];
-            ChangeColor(currentType.color);
+            ChangeMask(currentType.playerMaskSprite, currentType.color);
             typeIndex = index + 1;
             if (typeIndex >= typeCount)
                 typeIndex = 0;
@@ -213,11 +208,13 @@ public class Player : MonoBehaviour , ICollidable
             Debug.LogWarning("index out of range");
     }
 
-    void ChangeColor(Color c)
+    void ChangeMask(Sprite s,Color c)
     {
-        if (playerGraphicsSprite)
+        if (maskSprite)
         {
-            playerGraphicsSprite.color = c;
+            if (s)
+                maskSprite.sprite = s;
+            maskSprite.color = c;
         }
     }
 
