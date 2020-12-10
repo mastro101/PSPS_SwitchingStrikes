@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] PlayerVar player;
+    [SerializeField] PlayerVar player = null;
     [SerializeField] PolygonGenerator polygon = null;
 
     [SerializeField] EnemyTypeArrey enemies = null;

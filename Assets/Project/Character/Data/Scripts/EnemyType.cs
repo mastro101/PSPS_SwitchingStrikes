@@ -6,4 +6,5 @@ using UnityEngine;
 public class EnemyType : ScriptableObject
 {
     public Color color = new Color(1,1,1,1);
+    public Sprite playerMaskSprite = null;
 }
