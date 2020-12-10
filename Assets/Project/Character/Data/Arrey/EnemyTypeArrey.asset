@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: EnemyTypeArrey
   m_EditorClassIdentifier: 
   enemyPoolManager:
-  - {fileID: 11400000, guid: 05cdcae6e4447be478c683b53c952c1d, type: 2}
-  - {fileID: 11400000, guid: 111154892704eb540a30df76095336c1, type: 2}
   - {fileID: 11400000, guid: ef0a67ff8aa8a9546917d911c922850f, type: 2}
+  - {fileID: 11400000, guid: a5bfbec4f2c291f4ebecb45e2e8f9b79, type: 2}
   enemies:
-  - {fileID: 8179356949573800354, guid: ae82bb21a0b8c2540a28eddd80dcacf8, type: 3}
-  - {fileID: 936428046485349501, guid: 333623b101a50f543a3bdab72b8ea978, type: 3}
   - {fileID: 4860953165248611622, guid: c0a4fa214847df048903fc03fa8bf480, type: 3}
+  - {fileID: 7057241609778965667, guid: 35e03be82c5b0024698904b083248692, type: 3}
