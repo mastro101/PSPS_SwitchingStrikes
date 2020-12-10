@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour , ICollidable
 {
@@ -13,6 +14,9 @@ public class Player : MonoBehaviour , ICollidable
     [Space]
     [SerializeField] float startLife = 1f;
     [SerializeField] float speed = 0.5f;
+    [Space]
+    [SerializeField] UnityEvent OnDamageUE = null;
+    [SerializeField] UnityEvent OnDeathUE = null;
     
     PolygonGenerator polygonGenerator = null;
 
@@ -245,12 +249,14 @@ public class Player : MonoBehaviour , ICollidable
     {
         enemy.Destroy();
         currentLife--;
+        OnDamageUE?.Invoke();
         if (currentLife <= 0)
             Death();
     }
 
     void Death()
     {
+        OnDeathUE?.Invoke();
         SceneNavigation.ReloadScene();
     }
 
