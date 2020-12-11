@@ -15,8 +15,6 @@ MonoBehaviour:
   enemyPoolManager:
   - {fileID: 11400000, guid: ef0a67ff8aa8a9546917d911c922850f, type: 2}
   - {fileID: 11400000, guid: a5bfbec4f2c291f4ebecb45e2e8f9b79, type: 2}
-  - {fileID: 11400000, guid: 78b18ffcdd156784a96b448125b3b519, type: 2}
   enemies:
   - {fileID: 4860953165248611622, guid: c0a4fa214847df048903fc03fa8bf480, type: 3}
   - {fileID: 7057241609778965667, guid: 35e03be82c5b0024698904b083248692, type: 3}
-  - {fileID: 4578142287838294770, guid: fc855c6281b7a0645b85ae2ffb0fa686, type: 3}

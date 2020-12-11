@@ -8,10 +8,13 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] GenericPoolableObject poolable = null;
+    [SerializeField] IntData difficultValue = null;
     [Space]
     [SerializeField] EnemyType _type = null;
+    [SerializeField] float speedModifier = 1.1f;
     [SerializeField] float minSpeed = 0.1f;
     [SerializeField] float maxSpeed = 10f;
+    [SerializeField] float lifeModifier = 10f;
     [SerializeField] int minLife = 1;
     [SerializeField] int maxLife = 3;
 
@@ -31,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     int currentLife;
 
-    [SerializeField] float _currentSpeed = 1f;
+    float _currentSpeed = 1f;
     public float currentSpeed {
         get => _currentSpeed;
         set {
@@ -45,7 +48,7 @@ public class Enemy : MonoBehaviour
         } 
     }
 
-    [SerializeField] int _startLife = 1;
+    int _startLife = 1;
     public int startLife {
         get => _startLife;
         private set
@@ -60,15 +63,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Setup(int life)
+    public void Setup()
     {
-        currentLife = life;
+        startLife = (int)((float)difficultValue.value * lifeModifier);
+        currentSpeed = difficultValue.value * speedModifier;
+        currentLife = startLife;
     }
 
     public void Spawn(Vector2 pos, Quaternion rot)
     {
         instance = poolable.Take(pos, rot).gameObject.GetComponent<Enemy>();
-        instance.Setup(startLife);
+        instance.Setup();
     }
 
     public void TakeDamage(Player player, int i = 1)

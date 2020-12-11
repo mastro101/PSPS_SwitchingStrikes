@@ -38,15 +38,15 @@ public class PolygonGenerator : MonoBehaviour
         {
             if (mesh)
                 Destroy(mesh);
-            if (bonesParentTransform)
-                Destroy(bonesParentTransform.gameObject);
+            //if (bonesParentTransform)
+            //    Destroy(bonesParentTransform.gameObject);
         }
         else
         {
             if (mesh)
                 DestroyImmediate(mesh);
-            if (bonesParentTransform)
-                DestroyImmediate(bonesParentTransform.gameObject);
+            //if (bonesParentTransform)
+            //    DestroyImmediate(bonesParentTransform.gameObject);
         }
     }
 
@@ -158,11 +158,11 @@ public class PolygonGenerator : MonoBehaviour
             weights[i].weight0 = 1;
         }
 
-        bonesParentTransform = new GameObject("Bones").transform;
-        bonesParentTransform.position = transform.position;
-        bonesParentTransform.transform.SetParent(transform);
+        //bonesParentTransform = new GameObject("Bones").transform;
+        //bonesParentTransform.position = transform.position;
+        //bonesParentTransform.transform.SetParent(transform);
 
-        bones = new Transform[vertices.Count];
+        //bones = new Transform[vertices.Count];
         bindPoses = new Matrix4x4[vertices.Count];
 
         smr.sharedMesh = mesh;
