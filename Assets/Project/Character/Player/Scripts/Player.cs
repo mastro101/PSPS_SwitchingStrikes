@@ -15,6 +15,7 @@ public class Player : MonoBehaviour , ICollidable
     [Space]
     [SerializeField] float startLife = 1f;
     [SerializeField] float speed = 0.5f;
+    [SerializeField] public float killsComboMultiplier = 1f;
     [Space]
     [SerializeField] UnityEvent OnDamageUE = null;
     [SerializeField] UnityEvent OnDeathUE = null;
@@ -37,6 +38,8 @@ public class Player : MonoBehaviour , ICollidable
     public CollisionEvent collisionEvent { get; private set; }
 
     public bool activeCollide { get; private set; }
+
+    [HideInInspector] public int enemyKillsCombo = 0;
 
     #region Mono
     private void Awake()
@@ -244,6 +247,7 @@ public class Player : MonoBehaviour , ICollidable
 
     public void TakeDamage(Enemy enemy)
     {
+        enemyKillsCombo = 0;
         enemy.Destroy();
         currentLife--;
         OnDamageUE?.Invoke();

@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] IntData difficultValue = null;
     [Space]
     [SerializeField] EnemyType _type = null;
+    [SerializeField] int scoreBase = 1;
     [SerializeField] float speedModifier = 1.1f;
     [SerializeField] float minSpeed = 0.1f;
     [SerializeField] float maxSpeed = 10f;
@@ -37,9 +38,7 @@ public class Enemy : MonoBehaviour
     float _currentSpeed = 1f;
     public float currentSpeed {
         get => _currentSpeed;
-        set {
-            //TODO: do math based on difficult
-
+        private set {
             if (value < minSpeed) _currentSpeed = minSpeed;
             else if (value > maxSpeed) _currentSpeed = maxSpeed;
             else _currentSpeed = value;
@@ -53,8 +52,6 @@ public class Enemy : MonoBehaviour
         get => _startLife;
         private set
         {
-            //TODO: do math based on difficult
-
             if (value < minLife) _startLife = minLife;
             else if (value > maxLife) _startLife = maxLife;
             else _startLife = value;
@@ -78,8 +75,10 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(Player player, int i = 1)
     {
+        player.enemyKillsCombo++;
+        int score = (int)((((currentSpeed + currentLife) * scoreBase) * 1000f) * (player.killsComboMultiplier + player.enemyKillsCombo));
         currentLife -= i;
-        player.actualScore.Add(i);
+        player.actualScore.Add(score);
         InvokeOnDamage(player, i);
         if (currentLife <= 0)
             Death();
