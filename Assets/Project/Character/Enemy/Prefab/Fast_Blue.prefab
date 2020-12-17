@@ -95,29 +95,33 @@ PrefabInstance:
       propertyPath: lifeModifier
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8668988917063857013, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
+      propertyPath: minSpeed
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8668988917063857014, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Name
-      value: Blue_Enemy
+      value: Fast_Blue
       objectReference: {fileID: 0}
     - target: {fileID: 8875513053816973135, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Size.y
-      value: 14.368986
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8875513053816973135, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Center.y
-      value: 0.8127618
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8875513053816973135, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Size.x
-      value: 5.3707523
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8875513053816973135, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Center.x
-      value: 0.06856919
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8875513053816973135, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
       propertyPath: m_Size.z
-      value: 0.20000012
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 588a4fb370b6b144c856bdb391e9fbf4, type: 3}
