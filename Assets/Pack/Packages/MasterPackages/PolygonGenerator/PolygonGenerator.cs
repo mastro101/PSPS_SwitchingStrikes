@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PolygonGenerator : MonoBehaviour
+public partial class PolygonGenerator : MonoBehaviour
 {
     [SerializeField] MeshFilter mf = null;
     [SerializeField] SkinnedMeshRenderer smr = null;
@@ -27,6 +27,8 @@ public class PolygonGenerator : MonoBehaviour
 
     [SerializeField][HideInInspector] float generateRadius;
 
+    public PolygonData data;
+
     private void OnDestroy()
     {
         Destroy();
@@ -37,14 +39,20 @@ public class PolygonGenerator : MonoBehaviour
         if (Application.isPlaying)
         {
             if (mesh)
+            {
                 Destroy(mesh);
+                data = new PolygonData(null, null, null, null);
+            }
             //if (bonesParentTransform)
             //    Destroy(bonesParentTransform.gameObject);
         }
         else
         {
             if (mesh)
+            {
                 DestroyImmediate(mesh);
+                data = new PolygonData(null, null, null, null);
+            }
             //if (bonesParentTransform)
             //    DestroyImmediate(bonesParentTransform.gameObject);
         }
@@ -59,7 +67,7 @@ public class PolygonGenerator : MonoBehaviour
         Destroy();
 
         mesh = new Mesh();
-        mf.mesh = mesh;
+        mf.sharedMesh = mesh;
 
         Vector3 upVector = Vector3.up;
         float delta = 360f / sides;
@@ -169,18 +177,20 @@ public class PolygonGenerator : MonoBehaviour
 
         generateRadius = radius;
 
+        data = new PolygonData(vertices, indices, UVs, mesh);
+
         OnGenerate?.Invoke();
     }
 
     public List<Vector3> GetVertexPositions()
     {
-        return vertices;
+        return data.vertices;
     }
 
     public Vector3 GetVertexPositions(int i)
     {
         if (i < vertices.Count && i >= 0)
-            return vertices[i];
+            return data.vertices[i];
 
         Debug.LogWarning("index " + i + " is not in the list");
         return Vector3.zero;
@@ -194,5 +204,23 @@ public class PolygonGenerator : MonoBehaviour
     enum axe
     {
         x, y, z,
+    }
+
+    [Serializable]
+    public class PolygonData
+    {
+        public List<Vector3> vertices;
+        public int[] indices;
+        public List<Vector2> UVs;
+
+        public Mesh mesh;
+
+        public PolygonData(List<Vector3> vertices, int[] indices, List<Vector2> uVs, Mesh mesh)
+        {
+            this.vertices = vertices;
+            this.indices = indices;
+            UVs = uVs;
+            this.mesh = mesh;
+        }
     }
 }

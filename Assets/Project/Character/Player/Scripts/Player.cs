@@ -11,6 +11,8 @@ public class Player : MonoBehaviour , ICollidable
     [Space]
     [SerializeField] SwipeController swipeController = null;
     [SerializeField] Transform playerGraphics = null;
+    [SerializeField] Transform attackTransform = null;
+    [SerializeField] SpriteRenderer attackSprite = null;
     [SerializeField] SpriteRenderer maskSprite = null;
     [Space]
     [SerializeField] float startLife = 1f;
@@ -64,8 +66,8 @@ public class Player : MonoBehaviour , ICollidable
         //polygonGenerator.OnGenerate -= SetAttackDirection;
         //swipeController.OnSwipe -= CheckSwipe;
         //swipeController.OnTouchAndRealese -= ChangeType;
-        attackTween.Kill();
-        endAttack.Kill();
+        attackTween?.Kill();
+        endAttack?.Kill();
         //activeCollide = false;
     }
 
@@ -79,13 +81,13 @@ public class Player : MonoBehaviour , ICollidable
                 if (enemy.type == currentType)
                 {
                     enemy.TakeDamage(this);
-                    attackTween.Kill();
+                    attackTween?.Kill();
                     EndAttack();
                 }
                 else
                 {
                     TakeDamage(enemy);
-                    attackTween.Kill();
+                    attackTween?.Kill();
                     EndAttack();
                     // Enemy.TakeDamege???
                 }
@@ -98,6 +100,7 @@ public class Player : MonoBehaviour , ICollidable
     {
         polygonGenerator = pg;
         enemyTypeArrey = eta;
+        enemyKillsCombo = 0;
         SetupData();
         collisionEvent = new CollisionEvent(TriggerEnter, null, null, null, null, null);
         polygonGenerator.OnGenerate += SetAttackDirection;
@@ -108,6 +111,7 @@ public class Player : MonoBehaviour , ICollidable
         SetAttackDirection();
         SetPossibleType();
         ChangeType();
+        attackTransform.gameObject.SetActive(false);
     }
 
     public void SetupData()
@@ -203,6 +207,7 @@ public class Player : MonoBehaviour , ICollidable
         {
             currentType = possibleType[index];
             ChangeMask(currentType.playerMaskSprite, currentType.color);
+            ChangeAttack(currentType.attackSprite, currentType.color);
             typeIndex = index + 1;
             if (typeIndex >= typeCount)
                 typeIndex = 0;
@@ -221,6 +226,16 @@ public class Player : MonoBehaviour , ICollidable
         }
     }
 
+    void ChangeAttack(Sprite s, Color c)
+    {
+        if (attackSprite)
+        {
+            if (s)
+                attackSprite.sprite = s;
+            attackSprite.color = c;
+        }
+    }
+
     bool onAttack;
 
     void Attack(Vector2 v)
@@ -228,7 +243,8 @@ public class Player : MonoBehaviour , ICollidable
         if(!onAttack)
         {
             onAttack = true;
-            attackTween = playerGraphics.DOMove(v, PhysicsUtility.TimeFromSpaceAndVelocity(v.magnitude, speed)).OnComplete(EndAttack);
+            attackTransform.gameObject.SetActive(true);
+            attackTween = attackTransform.DOMove(v, PhysicsUtility.TimeFromSpaceAndVelocity(v.magnitude, speed)).OnComplete(EndAttack);
             attackTween.Play();
         }
     }
@@ -236,11 +252,14 @@ public class Player : MonoBehaviour , ICollidable
     void EndAttack()
     {
         Vector3 target = polygonGenerator.GetVertexPositions(0);
-        endAttack = playerGraphics.DOMove(target, PhysicsUtility.TimeFromSpaceAndVelocity(polygonGenerator.GetRadius(), speed)).OnComplete(RestartAttack);
+        //endAttack = attackSprite.transform.DOMove(target, PhysicsUtility.TimeFromSpaceAndVelocity(polygonGenerator.GetRadius(), speed)).OnComplete(RestartAttack);
+        RestartAttack();
     }    
 
     void RestartAttack()
     {
+        attackTransform.gameObject.SetActive(false);
+        attackTransform.position = transform.position;
         onAttack = false;
         ChangeType();
     }

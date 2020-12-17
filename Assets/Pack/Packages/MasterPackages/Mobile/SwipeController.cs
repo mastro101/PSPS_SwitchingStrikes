@@ -154,7 +154,8 @@ public class SwipeController : MonoBehaviour
         //    oldTouchPos = t.position;
         //}
 
-        swipeTextDebug.text = positionTouch.ToString();
+        if (swipeTextDebug)
+            swipeTextDebug.text = positionTouch.ToString();
     }
     
     public void SwipeHandlerClick()

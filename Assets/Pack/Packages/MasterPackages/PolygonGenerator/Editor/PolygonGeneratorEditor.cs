@@ -11,9 +11,15 @@ public class PolygonGeneratorEditor : Editor
         DrawDefaultInspector();
 
         PolygonGenerator script = (PolygonGenerator)target;
+
+        EditorGUI.BeginChangeCheck();
         if (GUILayout.Button("Generate"))
         {
-            script.GenerateMesh();
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(target, "Vaffanculo");
+                script.GenerateMesh();
+            }
         }
     }
 }
