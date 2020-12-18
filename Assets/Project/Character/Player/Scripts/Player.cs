@@ -195,7 +195,7 @@ public class Player : MonoBehaviour , ICollidable
     void ChangeType()
     {
         currentType = possibleType[typeIndex];
-        ChangeMask(currentType.playerMaskSprite, currentType.color);
+        ChangeSprite(currentType.playerMaskSprite, currentType.attackSprite, currentType.color);
         typeIndex++;
         if (typeIndex >= typeCount)
             typeIndex = 0;
@@ -206,14 +206,19 @@ public class Player : MonoBehaviour , ICollidable
         if (index >= 0 && index < possibleType.Count)
         {
             currentType = possibleType[index];
-            ChangeMask(currentType.playerMaskSprite, currentType.color);
-            ChangeAttack(currentType.attackSprite, currentType.color);
+            ChangeSprite(currentType.playerMaskSprite, currentType.attackSprite, currentType.color);
             typeIndex = index + 1;
             if (typeIndex >= typeCount)
                 typeIndex = 0;
         }
         else
             Debug.LogWarning("index out of range");
+    }
+
+    void ChangeSprite(Sprite sMask, Sprite sAttack, Color c)
+    {
+        ChangeMask(sMask, c);
+        ChangeAttack(sAttack, c);
     }
 
     void ChangeMask(Sprite s,Color c)
