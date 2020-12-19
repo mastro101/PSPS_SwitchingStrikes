@@ -135,7 +135,8 @@ MonoBehaviour:
   maskSprite: {fileID: 3521285051943068695}
   startLife: 1
   speed: 5
-  killsComboMultiplier: 50
+  killsComboConstant: 1
+  enemyQuantityToRaiseKillMultilpier: 10
   OnDamageUE:
     m_PersistentCalls:
       m_Calls: []

@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(Player player, int i = 1)
     {
         player.enemyKillsCombo++;
-        int score = (int)((((currentSpeed + currentLife) * scoreBase) * 1000f) * (player.killsComboMultiplier + player.enemyKillsCombo));
+        int score = (int)((((currentSpeed + currentLife) * scoreBase) * 1000f) * (player.killsComboConstant + (int)(player.enemyKillsCombo / player.enemyQuantityToRaiseKillMultilpier)));
         currentLife -= i;
         player.actualScore.Add(score);
         InvokeOnDamage(player, i);

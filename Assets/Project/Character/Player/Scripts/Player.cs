@@ -17,7 +17,8 @@ public class Player : MonoBehaviour , ICollidable
     [Space]
     [SerializeField] float startLife = 1f;
     [SerializeField] float speed = 0.5f;
-    [SerializeField] public float killsComboMultiplier = 1f;
+    [SerializeField] public float killsComboConstant = 1f;
+    [SerializeField] public int enemyQuantityToRaiseKillMultilpier = 10;
     [Space]
     [SerializeField] UnityEvent OnDamageUE = null;
     [SerializeField] UnityEvent OnDeathUE = null;
