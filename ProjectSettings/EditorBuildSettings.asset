@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/Level_2.unity
     guid: fe6155952fa142d49b2b63f375502c4e
-  - enabled: 1
-    path: Assets/Project/Scenes/Tests/Triangle 1.unity
-    guid: ca2d3318c0f663844a3e79f58c5c5302
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
