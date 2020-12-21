@@ -57,9 +57,9 @@ public class Spawner : MonoBehaviour
 
             int l = polygon.GetVertexPositions().Count;
             int r = Random.Range(1, l);
-            Vector3 v = polygon.GetVertexPositions(r);
-            Vector3 vDir = v.normalized;
-            Spawn(v + (vDir * offsetFromVertex), Quaternion.identity); //Quaternion.LookRotation(Vector3.forward, v * -1));
+            Vector3 pos = polygon.transform.position + polygon.GetVertexPositions(r);
+            Vector3 dir = polygon.GetVertexPositions(r).normalized;
+            Spawn(pos + (dir * offsetFromVertex), Quaternion.identity); //Quaternion.LookRotation(Vector3.forward, v * -1));
         }
     }
 }

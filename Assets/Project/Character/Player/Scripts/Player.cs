@@ -36,7 +36,7 @@ public class Player : MonoBehaviour , ICollidable
     float currentLife;
 
     Tween attackTween;
-    Tween endAttack;
+    //Tween endAttack;
 
     public CollisionEvent collisionEvent { get; private set; }
 
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour , ICollidable
         //swipeController.OnSwipe -= CheckSwipe;
         //swipeController.OnTouchAndRealese -= ChangeType;
         attackTween?.Kill();
-        endAttack?.Kill();
+        //endAttack?.Kill();
         //activeCollide = false;
     }
 
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour , ICollidable
         possibleAttackDirection = new List<AttackDirection>();
         for (int i = 1; i < polygonGenerator.GetVertexPositions().Count; i++)
         {
-            possibleAttackDirection.Add(new AttackDirection(VectorUtility.FromV2ToV3XYZ(polygonGenerator.GetVertexPositions(i))));
+            possibleAttackDirection.Add(new AttackDirection(VectorUtility.FromV2ToV3XYZ(polygonGenerator.transform.position + polygonGenerator.GetVertexPositions(i))));
         }
     }
 

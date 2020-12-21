@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_MoveToPlayer_Behaviour : EnemyBehaviuor
 {
-    [SerializeField] PlayerVar player;
+    [SerializeField] PlayerVar player = null;
 
     private void Update()
     {
