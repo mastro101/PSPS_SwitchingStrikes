@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9337eef035d3aa34a87de35dceb6d107, type: 3}
-  m_Name: Ex_Slow_Pool
+  m_Name: EnemyGreenNormalPool
   m_EditorClassIdentifier: 
   nObj: 10
-  serializePoolable: {fileID: 8298127691657196682, guid: 0c8731f07658d474c88876e47ee48803, type: 3}
+  serializePoolable: {fileID: 6103500731258834853, guid: ad0b2e834c43b7b4abf145d0abe05174, type: 3}

@@ -108,7 +108,6 @@ public class Player : MonoBehaviour , ICollidable
         swipeController.OnSwipe += CheckSwipe;
         swipeController.OnTouchAndRealese += ChangeType;
         activeCollide = true;
-        typeCount = _enemyTypeArrey.enemies.Length;
         SetAttackDirection();
         SetPossibleType();
         ChangeType();
@@ -184,27 +183,24 @@ public class Player : MonoBehaviour , ICollidable
         for (int i = 0; i < enemyTypeArrey.enemies.Length; i++)
         {
             EnemyType et = enemyTypeArrey.enemies[i].type;
-            if (possibleType.Contains(enemyTypeArrey.enemies[i].type))
+            if (possibleType.Contains(et))
                 continue;
 
             possibleType.Add(et);
         }
+        typeCount = possibleType.Count;
     }
 
     int typeIndex;
     int typeCount;
     void ChangeType()
     {
-        currentType = possibleType[typeIndex];
-        ChangeSprite(currentType.playerMaskSprite, currentType.attackSprite, currentType.color);
-        typeIndex++;
-        if (typeIndex >= typeCount)
-            typeIndex = 0;
+        ChangeType(typeIndex);
     }
     
     void ChangeType(int index)
     {
-        if (index >= 0 && index < possibleType.Count)
+        if (index >= 0 && index < typeCount)
         {
             currentType = possibleType[index];
             ChangeSprite(currentType.playerMaskSprite, currentType.attackSprite, currentType.color);
