@@ -283,7 +283,7 @@ public class Player : MonoBehaviour , ICollidable
     void Death()
     {
         OnDeathUE?.Invoke();
-        SceneNavigation.ReloadScene();
+        //SceneNavigation.ReloadScene();
     }
 
     class AttackDirection
