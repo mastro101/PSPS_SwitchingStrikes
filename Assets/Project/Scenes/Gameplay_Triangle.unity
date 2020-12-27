@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!43 &8296219
+--- !u!43 &433012573
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,8 +140,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 4
     localAABB:
-      m_Center: {x: 0.00000011920929, y: 0.3749999, z: 0}
-      m_Extent: {x: 1.2990382, y: 1.1250001, z: 0}
+      m_Center: {x: 0.00000011920929, y: 0.49999988, z: 0}
+      m_Extent: {x: 1.7320509, y: 1.5000001, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -220,7 +220,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: 0000000000000000000000000000000000000000000080bf0000003f0000003f000000000000c03f000000000000000000000000000080bf0000003f0000a03fe146a6bf030040bf000000000000000000000000ffff7fbf841b19bef4ffff3de346a63f000040bf000000000000000000000000ffff7fbf7223933f0000003e
+    _typelessdata: 0000000000000000000000000000000000000000000080bf0000003f0000003f0000000000000040000000000000000000000000000080bf0000003f0000c03fd7b3ddbf020080bf000000000000000000000000000080bfae67bbbe000000b4d9b3dd3f000080bf000000000000000000000000ffff7fbfecd9ae3f00000000
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -274,8 +274,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 0.00000011920929, y: 0.3749999, z: 0}
-    m_Extent: {x: 1.2990382, y: 1.1250001, z: 0}
+    m_Center: {x: 0.00000011920929, y: 0.49999988, z: 0}
+    m_Extent: {x: 1.7320509, y: 1.5000001, z: 0}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
@@ -559,14 +559,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 576378018691953730, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.32
+      objectReference: {fileID: 0}
     - target: {fileID: 576378018691953756, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 8296219}
+      objectReference: {fileID: 433012573}
     - target: {fileID: 576378018691953757, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 8296219}
+      objectReference: {fileID: 433012573}
+    - target: {fileID: 576378018691953757, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: vertices.Array.size
       value: 5
@@ -601,47 +609,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: vertices.Array.data[1].y
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: vertices.Array.data[2].x
-      value: -1.299038
+      value: -1.7320508
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: vertices.Array.data[2].y
-      value: -0.7500002
+      value: -1.0000002
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: vertices.Array.data[3].x
-      value: 1.2990383
+      value: 1.732051
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: vertices.Array.data[3].y
-      value: -0.75
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: UVs.Array.data[1].y
-      value: 1.25
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: UVs.Array.data[2].x
-      value: -0.14951903
+      value: -0.3660254
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: UVs.Array.data[2].y
-      value: 0.12499991
+      value: -0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: UVs.Array.data[3].x
-      value: 1.1495192
+      value: 1.3660254
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: UVs.Array.data[3].y
-      value: 0.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: generateRadius
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: vertices.Array.data[1].x
@@ -681,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: radius
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: changeBase
@@ -721,23 +729,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.vertices.Array.data[1].y
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.vertices.Array.data[2].x
-      value: -1.299038
+      value: -1.7320508
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.vertices.Array.data[2].y
-      value: -0.7500002
+      value: -1.0000002
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.vertices.Array.data[3].x
-      value: 1.2990383
+      value: 1.732051
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.vertices.Array.data[3].y
-      value: -0.75
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.indices.Array.data[1]
@@ -777,23 +785,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.UVs.Array.data[1].y
-      value: 1.25
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.UVs.Array.data[2].x
-      value: -0.14951903
+      value: -0.3660254
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.UVs.Array.data[2].y
-      value: 0.12499991
+      value: -0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.UVs.Array.data[3].x
-      value: 1.1495192
+      value: 1.3660254
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.UVs.Array.data[3].y
-      value: 0.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 576378018691953759, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
       propertyPath: data.vertices.Array.data[1].x
@@ -1250,11 +1258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2872037720180407897, guid: f27e45bd8a17c80458430d5b51d19f16, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.32
       objectReference: {fileID: 0}
     - target: {fileID: 2872037720180407897, guid: f27e45bd8a17c80458430d5b51d19f16, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2872037720180407897, guid: f27e45bd8a17c80458430d5b51d19f16, type: 3}
       propertyPath: m_LocalRotation.x

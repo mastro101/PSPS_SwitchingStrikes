@@ -10,11 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc24f6b5507224643ae2134299b5d50e, type: 3}
-  m_Name: EnemyTypeArrey
+  m_Name: SquareEnemyArrey
   m_EditorClassIdentifier: 
   enemyPoolManager:
   - {fileID: 11400000, guid: ef0a67ff8aa8a9546917d911c922850f, type: 2}
   - {fileID: 11400000, guid: a5bfbec4f2c291f4ebecb45e2e8f9b79, type: 2}
+  - {fileID: 11400000, guid: 4bceef9bef13ec2438546e003e0b4346, type: 2}
+  - {fileID: 11400000, guid: 2938ed1b707e1794999ad8ee59f158d8, type: 2}
+  - {fileID: 11400000, guid: b1e51be20b9c4344b991e4d62c3b5b22, type: 2}
+  - {fileID: 11400000, guid: 2ef975ea3516c6845a0395bafb6a84ea, type: 2}
   enemies:
   - {fileID: 4860953165248611622, guid: c0a4fa214847df048903fc03fa8bf480, type: 3}
   - {fileID: 7057241609778965667, guid: 35e03be82c5b0024698904b083248692, type: 3}
+  - {fileID: 5403151702233759719, guid: 6224016cbfb7d1b429705225bc194ff1, type: 3}
+  - {fileID: 7774326119796150658, guid: e2367fec46bdb2a4095ee6c4daa8df18, type: 3}
+  - {fileID: 6103500731258834854, guid: ad0b2e834c43b7b4abf145d0abe05174, type: 3}
+  - {fileID: 3762219565778317936, guid: 96caa84620653a34688d0c0c0772ad54, type: 3}

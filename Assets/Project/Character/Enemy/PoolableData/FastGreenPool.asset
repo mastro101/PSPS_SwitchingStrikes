@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5b1943bd367f4468887dce0996d597, type: 3}
-  m_Name: Ex_Fast_Enemy
+  m_Script: {fileID: 11500000, guid: 9337eef035d3aa34a87de35dceb6d107, type: 3}
+  m_Name: FastGreenPool
   m_EditorClassIdentifier: 
-  color: {r: 0.2807715, g: 1, b: 0, a: 1}
+  nObj: 5
+  serializePoolable: {fileID: 5403151702233759716, guid: 6224016cbfb7d1b429705225bc194ff1, type: 3}
