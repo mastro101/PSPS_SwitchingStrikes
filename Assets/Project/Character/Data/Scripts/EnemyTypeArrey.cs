@@ -6,19 +6,26 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyTypeArrey", menuName = "Scriptable/Enemy/Arrey")]
 public class EnemyTypeArrey : ScriptableObject
 {
-    [SerializeField] PoolManager[] enemyPoolManager = null;
+    [SerializeField] SpawnData[] data;
     [HideInInspector] public Enemy[] enemies;
 
     public void Setup()
     {
-        enemies = new Enemy[enemyPoolManager.Length];
-        for (int i = 0; i < enemyPoolManager.Length; i++)
+        enemies = new Enemy[data.Length];
+        for (int i = 0; i < data.Length; i++)
         {
-            if (enemyPoolManager[i])
+            if (data[i].enemyPoolManager)
             {
-                enemyPoolManager[i].SetPoolable();
-                enemies[i] = enemyPoolManager[i].GetPoolablePrefab().gameObject.GetComponent<Enemy>();
+                data[i].enemyPoolManager.SetPoolable();
+                enemies[i] = data[i].enemyPoolManager.GetPoolablePrefab().gameObject.GetComponent<Enemy>();
             }
         }
     }
+}
+
+[Serializable]
+public class SpawnData
+{
+    public PoolManager enemyPoolManager = null;
+    [Range(0, 100)] public float spawnProbability = 50f;
 }

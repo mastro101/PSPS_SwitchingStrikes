@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc24f6b5507224643ae2134299b5d50e, type: 3}
   m_Name: SquareEnemyArrey
   m_EditorClassIdentifier: 
-  enemyPoolManager:
-  - {fileID: 11400000, guid: ef0a67ff8aa8a9546917d911c922850f, type: 2}
-  - {fileID: 11400000, guid: a5bfbec4f2c291f4ebecb45e2e8f9b79, type: 2}
-  - {fileID: 11400000, guid: 4bceef9bef13ec2438546e003e0b4346, type: 2}
-  - {fileID: 11400000, guid: 2938ed1b707e1794999ad8ee59f158d8, type: 2}
-  - {fileID: 11400000, guid: b1e51be20b9c4344b991e4d62c3b5b22, type: 2}
-  - {fileID: 11400000, guid: 2ef975ea3516c6845a0395bafb6a84ea, type: 2}
+  data:
+  - enemyPoolManager: {fileID: 11400000, guid: ef0a67ff8aa8a9546917d911c922850f, type: 2}
+    spawnProbability: 16.666681
+  - enemyPoolManager: {fileID: 11400000, guid: a5bfbec4f2c291f4ebecb45e2e8f9b79, type: 2}
+    spawnProbability: 16.666681
+  - enemyPoolManager: {fileID: 11400000, guid: 4bceef9bef13ec2438546e003e0b4346, type: 2}
+    spawnProbability: 16.666681
+  - enemyPoolManager: {fileID: 11400000, guid: 2938ed1b707e1794999ad8ee59f158d8, type: 2}
+    spawnProbability: 16.666681
+  - enemyPoolManager: {fileID: 11400000, guid: b1e51be20b9c4344b991e4d62c3b5b22, type: 2}
+    spawnProbability: 16.666601
+  - enemyPoolManager: {fileID: 11400000, guid: 2ef975ea3516c6845a0395bafb6a84ea, type: 2}
+    spawnProbability: 16.666681
   enemies:
   - {fileID: 4860953165248611622, guid: c0a4fa214847df048903fc03fa8bf480, type: 3}
   - {fileID: 7057241609778965667, guid: 35e03be82c5b0024698904b083248692, type: 3}
