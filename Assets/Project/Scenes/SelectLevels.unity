@@ -454,7 +454,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 561185815}
   m_OnClick:
     m_PersistentCalls:
@@ -468,7 +468,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Triangle 1
+          m_StringArgument: Gameplay_Square
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &561185815
@@ -1029,7 +1029,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Gameplay
+          m_StringArgument: Gameplay_Triangle
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1509622378
