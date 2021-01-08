@@ -9,3 +9,10 @@ public class EnemyType : ScriptableObject
     public Sprite playerMaskSprite = null;
     public Sprite attackSprite = null;
 }
+
+[System.Serializable]
+public class SpriteMaskAndAttack
+{
+    public Sprite playerMaskSprite = null;
+    public Sprite attackSprite = null;
+}

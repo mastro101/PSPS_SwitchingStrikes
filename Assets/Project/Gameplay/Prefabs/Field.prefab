@@ -307,6 +307,7 @@ MonoBehaviour:
   minTime: 1
   maxTime: 2
   offsetFromVertex: 2
+  heartsPool: {fileID: 11400000, guid: fa63751f6a5f36741832024b8b85c5fa, type: 2}
 --- !u!1001 &4065463358647975044
 PrefabInstance:
   m_ObjectHideFlags: 0

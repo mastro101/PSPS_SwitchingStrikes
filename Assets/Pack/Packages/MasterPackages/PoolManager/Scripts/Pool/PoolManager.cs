@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "NewPool", menuName = "Scriptable/Pool")]
 public class PoolManager : ScriptableObject
@@ -14,7 +16,28 @@ public class PoolManager : ScriptableObject
 
     private void OnEnable()
     {
+        EditorApplication.playModeStateChanged += OnPlaymodeStateChange;
+        SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
         SetPoolable();
+    }
+
+    private void OnDisable()
+    {
+        EditorApplication.playModeStateChanged -= OnPlaymodeStateChange;
+        SceneManager.sceneUnloaded -= SceneManager_sceneUnloaded;
+    }
+
+    private void SceneManager_sceneUnloaded(Scene arg0)
+    {
+        spawned = false;
+    }
+
+    private void OnPlaymodeStateChange(PlayModeStateChange obj)
+    {
+        if (obj == PlayModeStateChange.ExitingPlayMode)
+        {
+            spawned = false;
+        }
     }
 
     public IPoolable GetPoolablePrefab()
@@ -22,7 +45,7 @@ public class PoolManager : ScriptableObject
         return poolablePrefab;
     }
 
-    public void SetPoolable()
+    public PoolManager SetPoolable()
     {
         if (serializePoolable)
         {
@@ -30,11 +53,15 @@ public class PoolManager : ScriptableObject
             if (poolablePrefab != null)
                 poolablePrefab.Setup(this);
         }
+        return this;
     }
 
     public void SpawnObjs()
     {
         if (poolablePrefab == null)
+            return;
+
+        if (spawned)
             return;
 
         poolables = new PoolableContainer[nObj];
@@ -47,6 +74,20 @@ public class PoolManager : ScriptableObject
             tempObj.OnInstantiate?.Invoke();
         }
         spawned = true;
+    }
+
+    public void DespawnObjs()
+    {
+        int l = poolables.Length;
+        if (poolables == null)
+            return;
+
+        for (int i = 0; i < l; i++)
+        {
+            IPoolable tempObj = poolables[i].poolable;
+            Destroy(tempObj.gameObject);
+        }
+        spawned = false;
     }
 
     public IPoolable TakeSpawnPoolable()
@@ -67,6 +108,11 @@ public class PoolManager : ScriptableObject
         }
         return null;
     }
+    
+    public IPoolable TakeSpawnPoolable(Vector3 pos, Quaternion rot, Transform parent = null)
+    {
+        return TakeSpawnPoolable()?.Take(pos, rot, parent);
+    }
 
     public void ReturnSpawnPoolable(IPoolable _poolable)
     {
@@ -77,14 +123,18 @@ public class PoolManager : ScriptableObject
             tempPoolableConteiner = poolables[i];
             if (tempPoolableConteiner.poolable == _poolable)
             {
-                tempPoolableConteiner.poolable.gameObject.SetActive(false);
-                tempPoolableConteiner.onPool = true;
+                tempPoolableConteiner.ReturnPoolable();
                 break;
             }
         }
     }
 
-    public void replacePoolable(IPoolable _poolable)
+    public int Count()
+    {
+        return poolables.Length;
+    }
+
+    public void ReplacePoolable(IPoolable _poolable)
     {
         int l = poolables.Length;
         PoolableContainer tempPoolableConteiner;
@@ -96,21 +146,6 @@ public class PoolManager : ScriptableObject
                 tempPoolableConteiner.ReturnPoolable();
             }
         }
-    }
-
-    private void OnDestroy()
-    {
-        int l = poolables.Length;
-        if (poolables == null)
-            return;
-
-        for (int i = 0; i < l; i++)
-        {
-            IPoolable tempObj = poolables[i].poolable;
-            Destroy(tempObj.gameObject);
-        }
-        poolables = null;
-        spawned = false;
     }
 }
 

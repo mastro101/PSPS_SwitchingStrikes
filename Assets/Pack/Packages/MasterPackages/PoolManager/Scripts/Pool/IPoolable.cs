@@ -9,7 +9,7 @@ public interface IPoolable
 
     Action OnInstantiate { get; set; }
 
-    IPoolable Take(Vector3 pos, Quaternion rot);
+    IPoolable Take(Vector3 pos, Quaternion rot, Transform parent = null);
     void Setup(PoolManager poolManager);
     void Destroy();
 }

@@ -17,7 +17,7 @@ public class GenericPoolableObject : MonoBehaviour, IPoolable
         OnSetup?.Invoke();
     }
 
-    public IPoolable Take(Vector3 pos, Quaternion rot)
+    public IPoolable Take(Vector3 pos, Quaternion rot, Transform parent = null)
     {
         IPoolable tempPoolable;
         if (poolManager)
@@ -26,7 +26,9 @@ public class GenericPoolableObject : MonoBehaviour, IPoolable
             if (tempPoolable != null)
             {
                 tempPoolable.gameObject.SetActive(true);
-                tempPoolable.gameObject.transform.SetPositionAndRotation(pos, rot);
+                tempPoolable.gameObject.transform.SetParent(parent);
+                tempPoolable.gameObject.transform.localPosition = pos;
+                tempPoolable.gameObject.transform.localRotation = rot;
                 OnSpawn?.Invoke();
                 return tempPoolable;
             }

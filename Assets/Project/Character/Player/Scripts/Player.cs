@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour , ICollidable
 {
     [SerializeField] PlayerVar playerInstance = null;
+    [SerializeField] IntData currentLife;
     [Space]
     [SerializeField] SwipeController swipeController = null;
     [SerializeField] Transform playerGraphics = null;
@@ -15,7 +16,7 @@ public class Player : MonoBehaviour , ICollidable
     [SerializeField] SpriteRenderer attackSprite = null;
     [SerializeField] SpriteRenderer maskSprite = null;
     [Space]
-    [SerializeField] float startLife = 1f;
+    [SerializeField] int startLife = 1;
     [SerializeField] float speed = 0.5f;
     [SerializeField] public float killsComboConstant = 1f;
     [SerializeField] public int enemyQuantityToRaiseKillMultilpier = 10;
@@ -33,7 +34,6 @@ public class Player : MonoBehaviour , ICollidable
     public FloatData actualScore;
 
     List<AttackDirection> possibleAttackDirection;
-    float currentLife;
 
     Tween attackTween;
     //Tween endAttack;
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour , ICollidable
 
     public void SetupData()
     {
-        currentLife = startLife;
+        currentLife.SetValue(startLife);
         actualScore.SetValue(0);
     }
 
@@ -270,9 +270,9 @@ public class Player : MonoBehaviour , ICollidable
     {
         enemyKillsCombo = 0;
         enemy.Destroy();
-        currentLife--;
+        currentLife.SetValue(currentLife.GetValue() -1);
         OnDamageUE?.Invoke();
-        if (currentLife <= 0)
+        if (currentLife.value <= 0)
             Death();
     }
 

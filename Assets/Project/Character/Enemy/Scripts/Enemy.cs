@@ -24,16 +24,20 @@ public class Enemy : MonoBehaviour
     public EnemyType type { get => _type; }
 
     #region Event
+    [SerializeField] UnityEvent OnSpawnUE = null;
+    public Action OnSpawn;
+    void InvokeOnSpawn() { OnSpawn?.Invoke(); OnSpawnUE?.Invoke(); }
+
     [SerializeField] UnityEvent<Player, int> OnDamageUE = null;
     public Action<int> OnDamage;
     void InvokeOnDamage(Player p, int i) { OnDamage?.Invoke(i); OnDamageUE?.Invoke(p, i); }
 
     [SerializeField] UnityEvent OnDeathUE = null;
     public Action OnDeath;
-    void InvokeOnDeath() { OnDeath?.Invoke(); OnDeathUE?.Invoke(); } 
+    void InvokeOnDeath() { OnDeath?.Invoke(); OnDeathUE?.Invoke(); }
     #endregion
 
-    int currentLife;
+    public int currentLife { get; private set; }
 
     float _currentSpeed = 1f;
     public float currentSpeed {
@@ -71,6 +75,7 @@ public class Enemy : MonoBehaviour
     {
         instance = poolable.Take(pos, rot).gameObject.GetComponent<Enemy>();
         instance.Setup();
+        instance.InvokeOnSpawn();
     }
 
     public void TakeDamage(Player player, int i = 1)

@@ -128,18 +128,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInstance: {fileID: 11400000, guid: 2c409aa4cc0fd3945921a7697c70438d, type: 2}
+  currentLife: {fileID: 11400000, guid: 466c33ea798d58748af8cc42fc1f28e6, type: 2}
   swipeController: {fileID: 2872037720180407896}
   playerGraphics: {fileID: 2872037720204832736}
   attackTransform: {fileID: 1133197611586366701}
   attackSprite: {fileID: 2136820858631309412}
   maskSprite: {fileID: 3521285051943068695}
-  startLife: 1
+  startLife: 3
   speed: 5
   killsComboConstant: 1
   enemyQuantityToRaiseKillMultilpier: 10
   OnDamageUE:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: eb7fce605af3a59438352e918d233650, type: 2}
+        m_TargetAssemblyTypeName: EventSignal, Assembly-CSharp
+        m_MethodName: Invoke
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeathUE:
     m_PersistentCalls:
       m_Calls:
