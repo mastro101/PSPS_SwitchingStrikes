@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,28 +15,18 @@ public class PoolManager : ScriptableObject
 
     private void OnEnable()
     {
-        EditorApplication.playModeStateChanged += OnPlaymodeStateChange;
         SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
         SetPoolable();
     }
 
     private void OnDisable()
     {
-        EditorApplication.playModeStateChanged -= OnPlaymodeStateChange;
         SceneManager.sceneUnloaded -= SceneManager_sceneUnloaded;
     }
 
     private void SceneManager_sceneUnloaded(Scene arg0)
     {
         spawned = false;
-    }
-
-    private void OnPlaymodeStateChange(PlayModeStateChange obj)
-    {
-        if (obj == PlayModeStateChange.ExitingPlayMode)
-        {
-            spawned = false;
-        }
     }
 
     public IPoolable GetPoolablePrefab()
