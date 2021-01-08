@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9337eef035d3aa34a87de35dceb6d107, type: 3}
   m_Name: BulkyBluePool
   m_EditorClassIdentifier: 
-  nObj: 3
+  nObj: 1
   serializePoolable: {fileID: 7774326119796150657, guid: e2367fec46bdb2a4095ee6c4daa8df18, type: 3}

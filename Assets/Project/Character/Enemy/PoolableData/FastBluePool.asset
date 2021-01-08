@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9337eef035d3aa34a87de35dceb6d107, type: 3}
   m_Name: FastBluePool
   m_EditorClassIdentifier: 
-  nObj: 5
+  nObj: 3
   serializePoolable: {fileID: 4860953165248611621, guid: c0a4fa214847df048903fc03fa8bf480, type: 3}
