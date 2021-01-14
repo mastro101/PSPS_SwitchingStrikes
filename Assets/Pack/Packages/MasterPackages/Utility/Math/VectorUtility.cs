@@ -49,4 +49,34 @@ public static class VectorUtility
     {
         return new Vector2(MathUtility.Approximation(_vector2.x, _decimal), MathUtility.Approximation(_vector2.y, _decimal));
     }
+
+    public static Vector4 NewVector4(Vector3 xyz, float w = 1)
+    {
+        return new Vector4(xyz.x, xyz.y, xyz.z, w);
+    }
+    
+    public static Vector4 NewVector4(float x, Vector3 yzw)
+    {
+        return new Vector4(x, yzw.x, yzw.y, yzw.z);
+    }
+
+    public static Vector4 NewVector4(Vector2 xy, Vector2 zw)
+    {
+        return new Vector4(xy.x, xy.y, zw.x, zw.y);
+    }
+
+    public static Vector4 NewVector4(Vector2 xy, float z, float w)
+    {
+        return new Vector4(xy.x, xy.y, z, w);
+    }
+
+    public static Vector4 NewVector4(float x, Vector2 yz, float w)
+    {
+        return new Vector4(x, yz.x, yz.y, w);
+    }
+
+    public static Vector4 NewVector4(float x, float y, Vector2 zw)
+    {
+        return new Vector4(x, y, zw.x, zw.y);
+    }
 }

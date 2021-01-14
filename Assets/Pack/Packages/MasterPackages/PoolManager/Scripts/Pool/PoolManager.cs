@@ -8,25 +8,13 @@ using UnityEngine.SceneManagement;
 public class PoolManager : ScriptableObject
 {
     [SerializeField] int nObj = 10;
-    [SerializeField] [HideInInspector] GameObject serializePoolable = null;
-    [SerializeField] IPoolable poolablePrefab;
-    PoolableContainer[] poolables;
-    bool spawned;
+    [SerializeField] [SerializeInterface(typeof(IPoolable))] GameObject serializePoolable = null;
+    IPoolable poolablePrefab;
+    [NonSerialized] List<PoolableContainer> poolables;
 
     private void OnEnable()
     {
-        SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
         SetPoolable();
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneUnloaded -= SceneManager_sceneUnloaded;
-    }
-
-    private void SceneManager_sceneUnloaded(Scene arg0)
-    {
-        spawned = false;
     }
 
     public IPoolable GetPoolablePrefab()
@@ -50,54 +38,90 @@ public class PoolManager : ScriptableObject
         if (poolablePrefab == null)
             return;
 
-        if (spawned)
-            return;
-
-        poolables = new PoolableContainer[nObj];
+        poolables = new List<PoolableContainer>(nObj);
         for (int i = 0; i < nObj; i++)
         {
-            IPoolable tempObj = Instantiate(poolablePrefab.gameObject).GetComponent<IPoolable>();
-            tempObj.Setup(this);
-            poolables[i] = new PoolableContainer(tempObj, true);
-            tempObj.gameObject.SetActive(false);
-            tempObj.OnInstantiate?.Invoke();
+            SpawnObj();
         }
-        spawned = true;
     }
 
-    public void DespawnObjs()
+    IPoolable InstantiatePoolable()
     {
-        int l = poolables.Length;
-        if (poolables == null)
-            return;
+        IPoolable tempObj = null;
+        GameObject go = ApplicationUtility.SafeInstantiate(poolablePrefab.gameObject, Vector3.zero, Quaternion.identity, null);
+        if (go) tempObj = go.GetComponent<IPoolable>();
+        if (tempObj == null)
+            return null;
+        return tempObj.Setup(this);
+    }
 
-        for (int i = 0; i < l; i++)
+    private IPoolable SpawnObj()
+    {
+        IPoolable tempObj = InstantiatePoolable();
+        if (tempObj != null)
         {
-            IPoolable tempObj = poolables[i].poolable;
-            Destroy(tempObj.gameObject);
+            poolables.Add(new PoolableContainer(tempObj, true));
+            tempObj.OnInstantiate?.Invoke();
         }
-        spawned = false;
+        return tempObj;
+    }
+
+    private IPoolable SpawnObj(int index)
+    {
+        if (index >= 0 && index < poolables.Capacity)
+        {
+            IPoolable tempObj = InstantiatePoolable();
+            if (tempObj != null)
+            {
+                poolables[index] = new PoolableContainer(tempObj, true);
+                tempObj.OnInstantiate?.Invoke();
+            }
+            return tempObj;
+        }
+        Debug.LogError("index Out of Range, for default the Object is the last of the list");
+        return SpawnObj();
+    }
+
+    public void AddAndSpawnObj(int n)
+    {
+        if (n > 0)
+        {
+            poolables.Capacity += n;
+            for (int i = poolables.Capacity - n; i < poolables.Count; i++)
+            {
+                SpawnObj();
+            }
+        }
+    }
+
+    private IPoolable AddAndSpawnObj()
+    {
+        return SpawnObj();
     }
 
     public IPoolable TakeSpawnPoolable()
     {
-        if (!spawned)
+        if (poolables.Count <= 0)
             SpawnObjs();
 
-        int l = poolables.Length;
+        int l = poolables.Count;
         PoolableContainer TempPoolable;
         for (int i = 0; i < l; i++)
         {
             TempPoolable = poolables[i];
-            if (TempPoolable.onPool)
+            if (TempPoolable != null)
             {
-                TempPoolable.onPool = false;
-                return TempPoolable.poolable;
+                if (TempPoolable.onPool)
+                {
+                    TempPoolable.TakePoolable();
+                    return TempPoolable.poolable;
+                }
             }
         }
-        return null;
+
+        return AddAndSpawnObj();
     }
-    
+
     public IPoolable TakeSpawnPoolable(Vector3 pos, Quaternion rot, Transform parent = null)
     {
         return TakeSpawnPoolable()?.Take(pos, rot, parent);
@@ -105,35 +129,60 @@ public class PoolManager : ScriptableObject
 
     public void ReturnSpawnPoolable(IPoolable _poolable)
     {
-        int l = poolables.Length;
-        PoolableContainer tempPoolableConteiner;
-        for (int i = 0; i < l; i++)
+        if (Application.isPlaying)
         {
-            tempPoolableConteiner = poolables[i];
-            if (tempPoolableConteiner.poolable == _poolable)
+            int l = poolables.Count;
+            PoolableContainer tempPoolableConteiner;
+            for (int i = 0; i < l; i++)
             {
-                tempPoolableConteiner.ReturnPoolable();
-                break;
+                tempPoolableConteiner = poolables[i];
+                if (tempPoolableConteiner.poolable == _poolable)
+                {
+                    tempPoolableConteiner.ReturnPoolable();
+                    return;
+                }
+            }
+
+            Destroy(_poolable.gameObject);
+        }
+    }
+
+    public void ReplacePoolable(IPoolable _poolable)
+    {
+        if (poolables != null)
+        {
+            int l = poolables.Count;
+            PoolableContainer tempPoolableConteiner;
+            for (int i = 0; i < l; i++)
+            {
+                tempPoolableConteiner = poolables[i];
+                if (tempPoolableConteiner.poolable == _poolable)
+                {
+                    SpawnObj(i);
+                    return;
+                }
             }
         }
     }
 
     public int Count()
     {
-        return poolables.Length;
+        if (poolables != null)
+            return poolables.Count;
+        else
+            return 0;
     }
 
-    public void ReplacePoolable(IPoolable _poolable)
+    public void DespawnObjs()
     {
-        int l = poolables.Length;
-        PoolableContainer tempPoolableConteiner;
+        int l = poolables.Count;
+        if (poolables == null)
+            return;
+
         for (int i = 0; i < l; i++)
         {
-            tempPoolableConteiner = poolables[i];
-            if (tempPoolableConteiner.poolable == _poolable)
-            {
-                tempPoolableConteiner.ReturnPoolable();
-            }
+            IPoolable tempObj = poolables[i].poolable;
+            Destroy(tempObj.gameObject);
         }
     }
 }
@@ -147,11 +196,18 @@ class PoolableContainer
     {
         poolable = _obj;
         onPool = _onPool;
+        poolable.gameObject.SetActive(!_onPool);
     }
 
     public void ReturnPoolable()
     {
         poolable.gameObject.SetActive(false);
         onPool = true;
+    }
+
+    public void TakePoolable()
+    {
+        poolable.gameObject.SetActive(true);
+        onPool = false;
     }
 }

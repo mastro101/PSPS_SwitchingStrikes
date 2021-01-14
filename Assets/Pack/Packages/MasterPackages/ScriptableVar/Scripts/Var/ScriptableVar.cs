@@ -8,13 +8,15 @@ public abstract class ScriptableVar<T> : ScriptableObject
     [SerializeField] T _value = default;
     public T value 
     { 
-        get { return _value; } 
+        get { return _value; }
         private set 
-        { 
-            _value = value; 
-            OnChangeValue?.Invoke(_value); 
+        {
+            _value = value;
+            OnChangeValue?.Invoke(_value);
         }
     }
+
+    public virtual void SetDefault() { value = default; }
 
     public void SetValue(T _var)
     {

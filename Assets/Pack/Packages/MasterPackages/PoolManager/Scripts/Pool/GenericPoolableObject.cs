@@ -2,47 +2,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PoolableDefault;
 
 public class GenericPoolableObject : MonoBehaviour, IPoolable
 {
-    public PoolManager poolManager { get; private set; }
+    public PoolManager poolManager { get; set; }
     public Action OnInstantiate { get; set; }
 
-    public Action OnSetup;
-    public Action OnSpawn;
+    public Action OnSetup { get; set; }
+    public Action OnSpawn { get; set; }
 
-    public void Setup(PoolManager _poolManager)
+    public IPoolable Setup(PoolManager _poolManager)
     {
-        poolManager = _poolManager;
-        OnSetup?.Invoke();
+        return this.DefaultSetup(_poolManager);
     }
 
     public IPoolable Take(Vector3 pos, Quaternion rot, Transform parent = null)
     {
-        IPoolable tempPoolable;
-        if (poolManager)
-        {
-            tempPoolable = poolManager.TakeSpawnPoolable();
-            if (tempPoolable != null)
-            {
-                tempPoolable.gameObject.SetActive(true);
-                tempPoolable.gameObject.transform.SetParent(parent);
-                tempPoolable.gameObject.transform.localPosition = pos;
-                tempPoolable.gameObject.transform.localRotation = rot;
-                OnSpawn?.Invoke();
-                return tempPoolable;
-            }
-        }
-        return Instantiate(this, pos, rot);
+        return this.DefaultTake(pos, rot, parent);
     }
     
     public void Destroy()
     {
-        if (poolManager)
-        {
-            poolManager.ReturnSpawnPoolable(this);
-        }
-        else
-            Destroy(gameObject);
+        this.DefaultDestroy();
+    }
+
+    private void OnDestroy()
+    {        
+        this.OnDestroyPoolable();
     }
 }
