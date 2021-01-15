@@ -6,18 +6,24 @@ using UnityEngine;
 public class EnemyType : ScriptableObject
 {
     public Color color = new Color(1,1,1,1);
-    public Sprite playerMaskSprite = null;
+    PlayerMaskScriptable maskData;
     [SerializeField] PoolManager attackPrefabSerialized;
     public IPoolable attackPrefab = null;
 
-    public void Setup()
+    public void Setup(PlayerMaskScriptable _maskData)
     {
         if (attackPrefabSerialized)
         {
+            maskData = _maskData;
             attackPrefabSerialized.SetPoolable();
             attackPrefabSerialized.SpawnObjs();
             attackPrefab = attackPrefabSerialized.GetPoolablePrefab();
         }
+    }
+
+    public Sprite GetMaskSprite()
+    {
+        return maskData.GetMaskSprite(this);
     }
 }
 

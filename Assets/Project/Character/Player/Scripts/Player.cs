@@ -16,6 +16,7 @@ public class Player : MonoBehaviour , ICollidable
     IPoolable attackPoolable = null;
     [SerializeField] SpriteRenderer maskSprite = null;
     [Space]
+    [SerializeField] PlayerMaskScriptable maskData;
     [SerializeField] int startLife = 1;
     [SerializeField] float speed = 0.5f;
     [SerializeField] public float killsComboConstant = 1f;
@@ -185,7 +186,7 @@ public class Player : MonoBehaviour , ICollidable
             EnemyType et = enemyTypeArrey.enemies[i].type;
             if (possibleType.Contains(et))
                 continue;
-            et.Setup();
+            et.Setup(maskData);
             possibleType.Add(et);
         }
         typeCount = possibleType.Count;
@@ -204,7 +205,7 @@ public class Player : MonoBehaviour , ICollidable
         if (index >= 0 && index < typeCount)
         {
             currentType = possibleType[index];
-            ChangeMaskAndAttack(currentType.playerMaskSprite, currentType.attackPrefab, currentType.color);
+            ChangeMaskAndAttack(currentType.GetMaskSprite(), currentType.attackPrefab, currentType.color);
             typeIndex = index + 1;
             if (typeIndex >= typeCount)
                 typeIndex = 0;
