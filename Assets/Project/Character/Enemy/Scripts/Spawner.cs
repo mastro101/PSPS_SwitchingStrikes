@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour
 
     void Spawn(Vector3 pos, Quaternion rot)
     {
-        Enemy e = enemies.enemies[Random.Range(0, enemies.enemies.Length)];
+        Enemy e = enemies.GetEnemy(Random.Range(0f, 100f));
         e.Spawn(pos, rot);
     }
 
