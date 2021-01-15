@@ -9637,6 +9637,7 @@ GameObject:
   - component: {fileID: 995311708391895141}
   - component: {fileID: 1423676796549783941}
   - component: {fileID: 7563969643696039026}
+  - component: {fileID: 1082939140341927190}
   m_Layer: 0
   m_Name: BlueEnergyBall
   m_TagString: Untagged
@@ -14441,6 +14442,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1082939140341927190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3373699267357304451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe1924791b59ba48a84b46741e0381a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3459047729957320352
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 1, a: 1}
   playerMaskSprite: {fileID: 21300000, guid: 2893cb46343b0b849a5653793569df6e, type: 3}
+  attackPrefabSerialized: {fileID: 11400000, guid: b42799b87b195404288f2a78bc32bca8, type: 2}

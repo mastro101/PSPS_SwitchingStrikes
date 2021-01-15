@@ -13,7 +13,7 @@ public class Player : MonoBehaviour , ICollidable
     [SerializeField] SwipeController swipeController = null;
     [SerializeField] Transform playerGraphics = null;
     [SerializeField] Transform attackTransform = null;
-    [SerializeField] SpriteRenderer attackSprite = null;
+    IPoolable attackPoolable = null;
     [SerializeField] SpriteRenderer maskSprite = null;
     [Space]
     [SerializeField] int startLife = 1;
@@ -185,7 +185,7 @@ public class Player : MonoBehaviour , ICollidable
             EnemyType et = enemyTypeArrey.enemies[i].type;
             if (possibleType.Contains(et))
                 continue;
-
+            et.Setup();
             possibleType.Add(et);
         }
         typeCount = possibleType.Count;
@@ -195,7 +195,8 @@ public class Player : MonoBehaviour , ICollidable
     int typeCount;
     void ChangeType()
     {
-        ChangeType(typeIndex);
+        if (!onAttack)
+            ChangeType(typeIndex);
     }
     
     void ChangeType(int index)
@@ -203,7 +204,7 @@ public class Player : MonoBehaviour , ICollidable
         if (index >= 0 && index < typeCount)
         {
             currentType = possibleType[index];
-            ChangeSprite(currentType.playerMaskSprite, currentType.attackSprite, currentType.color);
+            ChangeMaskAndAttack(currentType.playerMaskSprite, currentType.attackPrefab, currentType.color);
             typeIndex = index + 1;
             if (typeIndex >= typeCount)
                 typeIndex = 0;
@@ -212,29 +213,31 @@ public class Player : MonoBehaviour , ICollidable
             Debug.LogWarning("index out of range");
     }
 
-    void ChangeSprite(Sprite sMask, Sprite sAttack, Color c)
+    void ChangeMaskAndAttack(Sprite sMask, IPoolable pAttack, Color c)
     {
-        ChangeMask(sMask, c);
-        ChangeAttack(sAttack, c);
+        ChangeMask(sMask);//, c);
+        ChangeAttack(pAttack);
     }
 
-    void ChangeMask(Sprite s,Color c)
+    void ChangeMask(Sprite s)//,Color c)
     {
         if (maskSprite)
         {
             if (s)
                 maskSprite.sprite = s;
-            maskSprite.color = c;
+            //maskSprite.color = c;
         }
     }
 
-    void ChangeAttack(Sprite s, Color c)
+    void ChangeAttack(IPoolable p)
     {
-        if (attackSprite)
+        if (attackTransform)
         {
-            if (s)
-                attackSprite.sprite = s;
-            attackSprite.color = c;
+            if (p != null)
+            {
+                attackPoolable = p.Take(Vector3.zero, Quaternion.identity, attackTransform);
+                attackPoolable.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -246,6 +249,7 @@ public class Player : MonoBehaviour , ICollidable
         {
             onAttack = true;
             attackTransform.gameObject.SetActive(true);
+            attackPoolable.gameObject.SetActive(true);
             attackTween = attackTransform.DOMove(v, PhysicsUtility.TimeFromSpaceAndVelocity(v.magnitude, speed)).OnComplete(EndAttack);
             attackTween.Play();
         }
@@ -260,6 +264,7 @@ public class Player : MonoBehaviour , ICollidable
 
     void RestartAttack()
     {
+        attackPoolable.Destroy();
         attackTransform.gameObject.SetActive(false);
         attackTransform.position = transform.position;
         onAttack = false;
