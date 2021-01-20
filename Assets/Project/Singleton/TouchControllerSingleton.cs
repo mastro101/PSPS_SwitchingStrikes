@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TouchControllerSingleton : Singleton<TouchControllerSingleton>
+public class TouchControllerSingleton : SingletonProject<TouchControllerSingleton>
 {
     Touch[] touches;
     Touch touch;

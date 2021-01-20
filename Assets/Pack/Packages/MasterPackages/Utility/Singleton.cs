@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SingletonMaster<T> : MonoBehaviour where T : SingletonMaster<T>
+public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
-    protected static T instance;
+    protected static T instance { get; private set; }
 
     protected virtual void Awake()
     {
@@ -18,12 +18,12 @@ public abstract class SingletonMaster<T> : MonoBehaviour where T : SingletonMast
             Destroy(this.gameObject);
     }
 
-    public static T GetInstance()
+    public T GetInstance()
     {
         if (instance == null)
         {
             if (!ApplicationUtility.IsQuitting())
-                return instance = InstantiateSingleton(typeof(T));
+                InstantiateSingleton(typeof(T));
         }
 
         return instance;
@@ -31,13 +31,11 @@ public abstract class SingletonMaster<T> : MonoBehaviour where T : SingletonMast
 
     protected abstract T Setup();
 
-    private static T InstantiateSingleton(System.Type t)
+    private void InstantiateSingleton(System.Type t)
     {
         if (instance == null)
         {
-            GameObject go = new GameObject(t.Name, t);
+            Instantiate(this);
         }
-
-        return instance;
     }
 }

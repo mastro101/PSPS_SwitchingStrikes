@@ -2,39 +2,35 @@
 using System;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
-    public static SoundManager instance;
-
     //public AudioMixerGroup mixerGroup;
-
-    public Sound[] sounds;
+    [SerializeField] SoundTypeVolume[] soundTypes = null;
+    [SerializeField] Sound[] sounds = null;
     int l;
 
-    void Awake()
+    protected override SoundManager Setup()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+        //instance.soundTypes = prefab.soundTypes;
+        //instance.sounds = prefab.sounds;
 
-            l = instance.sounds.Length;
-            for (int i = 0; i < l; i++)
-            {
-                Sound s = instance.sounds[i];
-                //GameObject go = new GameObject(s.name);
-                //go.transform.SetParent(this.transform);
-                s.source = gameObject.AddComponent<AudioSource>();
-                s.source.clip = s.clip;
-                s.source.loop = s.loop;
-                s.source.playOnAwake = false;
-            }
+        l = GetInstance().sounds.Length;
+        for (int i = 0; i < l; i++)
+        {
+            Sound s = GetInstance().sounds[i];
+            //GameObject go = new GameObject(s.name);
+            //go.transform.SetParent(this.transform);
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.loop = s.loop;
+            s.source.playOnAwake = false;
         }
+        for (int i = 0; i < GetInstance().soundTypes.Length; i++)
+        {
+            GetInstance().soundTypes[i].SetSound(sounds);
+            GetInstance().soundTypes[i].SetVolume();
+        }
+        return this;
     }
 
     public void Play(AudioClip clip)
@@ -49,7 +45,7 @@ public class SoundManager : MonoBehaviour
 
         for (int i = 0; i < l; i++)
         {
-            s = instance.sounds[i];
+            s = GetInstance().sounds[i];
             if (s.clip == clip)
             {
                 s.source.volume = s.volume;// * (1f + UnityEngine.Random.Range(-s.volumeVariance / 2f, s.volumeVariance / 2f));
@@ -65,7 +61,7 @@ public class SoundManager : MonoBehaviour
 
     public void Play(string sound)
     {
-        Sound s = Array.Find(instance.sounds, item => item.name == sound);
+        Sound s = Array.Find(GetInstance().sounds, item => item.name == sound);
 
         if (s == null)
         {
@@ -88,7 +84,7 @@ public class SoundManager : MonoBehaviour
 
         for (int i = 0; i < l; i++)
         {
-            s = instance.sounds[i];
+            s = GetInstance().sounds[i];
             if (s.clip == clip)
             {
                 s.source.Pause();
@@ -101,7 +97,7 @@ public class SoundManager : MonoBehaviour
 
     public void Pause(string sound)
     {
-        Sound s = Array.Find(instance.sounds, item => item.name == sound);
+        Sound s = Array.Find(GetInstance().sounds, item => item.name == sound);
 
         if (s == null)
         {
@@ -113,9 +109,30 @@ public class SoundManager : MonoBehaviour
 
     public void Pause()
     {
-        foreach (Sound sound in instance.sounds)
+        foreach (Sound sound in GetInstance().sounds)
         {
             sound.source.Stop();
         }
+    }
+
+    public void SetVolume(float _volume, SoundType _type)
+    {
+        for (int i = 0; i < soundTypes.Length; i++)
+        {
+            if (soundTypes[i].type == _type)
+                soundTypes[i].SetVolume(_volume);
+        }
+    }
+
+    public float GetVolume(SoundType _type)
+    {
+        for (int i = 0; i < soundTypes.Length; i++)
+        {
+            if (soundTypes[i].type == _type)
+                return soundTypes[i].volume;
+        }
+
+        Debug.LogError(_type + " is not present in the sound manager");
+        return 0f;
     }
 }
