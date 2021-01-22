@@ -68,6 +68,8 @@ public class MasksMenuController : MonoBehaviour
 
     public PlayerMaskScriptable Equip()
     {
-        return equippedMask.SetValue(currentMask);
+        if (currentMask.IsUnlock())
+            return equippedMask.SetValue(currentMask);
+        return equippedMask.value;
     }
 }
