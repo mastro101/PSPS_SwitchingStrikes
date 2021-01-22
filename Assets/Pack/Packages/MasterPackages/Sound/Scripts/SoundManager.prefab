@@ -47,14 +47,59 @@ MonoBehaviour:
   - _type: 0
     _volume: 0.635
   - _type: 1
-    _volume: 0
+    _volume: 1
   sounds:
-  - name: 
-    clip: {fileID: 0}
+  - name: Main Menu
+    clip: {fileID: 8300000, guid: e5972f52abff6fa49910bfcaba568fb5, type: 3}
     type: 0
-    volume: 0
+    volume: 1
     maxVolume: 0.676
-    pitch: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Arena 1
+    clip: {fileID: 8300000, guid: 702e5159dcdc5cf4d9fe49ca6fc67c42, type: 3}
+    type: 0
+    volume: 1
+    maxVolume: 0.676
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Arena 2
+    clip: {fileID: 8300000, guid: 491b52afc6acc9646a5a1e27472a2bbf, type: 3}
+    type: 0
+    volume: 1
+    maxVolume: 0.676
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Player Damaged
+    clip: {fileID: 8300000, guid: d623849a8dc967d4e9047f1c9a95d107, type: 3}
+    type: 1
+    volume: 1
+    maxVolume: 1
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy Damaged
+    clip: {fileID: 8300000, guid: c27e44dcac99c314386bcc174c7aaa64, type: 3}
+    type: 1
+    volume: 1
+    maxVolume: 1
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Enemy Death
+    clip: {fileID: 8300000, guid: b630aa3fa077d874890bc55ba77c83cc, type: 3}
+    type: 1
+    volume: 0.7
+    maxVolume: 0.7
+    pitch: 1
     pitchVariance: 0
     loop: 0
     source: {fileID: 0}
