@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: BlueEnemy
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 1, a: 1}
-  playerMaskSprite: {fileID: 21300000, guid: 2893cb46343b0b849a5653793569df6e, type: 3}
-  attackPrefabSerialized: {fileID: 11400000, guid: b42799b87b195404288f2a78bc32bca8, type: 2}
+  VFXAttack:
+    generateAttackSerialized: {fileID: 5519296953026350306, guid: 321a5c2de1ee52d4b9d69f43936e18b6, type: 3}
+    attackSerialized: {fileID: 1423676796549783941, guid: f0117ab869861234f9c57863964637f7, type: 3}
+    destroiedAttackSerialized: {fileID: 5778019145627114308, guid: f0ba985b3e2867943802a22b2299e852, type: 3}
+    generateAttack: {fileID: 0}
+    attack: {fileID: 0}
+    destroiedAttack: {fileID: 0}

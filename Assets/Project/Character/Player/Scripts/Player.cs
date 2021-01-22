@@ -13,7 +13,8 @@ public class Player : MonoBehaviour , ICollidable
     [SerializeField] SwipeController swipeController = null;
     [SerializeField] Transform playerGraphics = null;
     [SerializeField] Transform attackTransform = null;
-    IPoolable attackPoolable = null;
+    VFXAttack currentAttack = null;
+    VFXAttack nextAttack = null;
     [SerializeField] SpriteRenderer maskSprite = null;
     [Space]
     [SerializeField] MaskVar maskData;
@@ -110,7 +111,6 @@ public class Player : MonoBehaviour , ICollidable
         swipeController.OnTouchAndRealese += ChangeType;
         activeCollide = true;
         SetAttackDirection();
-        SetPossibleType();
         ChangeType();
         attackTransform.gameObject.SetActive(false);
     }
@@ -187,12 +187,16 @@ public class Player : MonoBehaviour , ICollidable
             if (possibleType.Contains(et))
                 continue;
             et.Setup(maskData.value);
+            et.VFXAttack.Generate();
+            et.VFXAttack.ResetPosition(transform);
+            et.VFXAttack.attack.transform.SetParent(attackTransform);
             possibleType.Add(et);
         }
         typeCount = possibleType.Count;
     }
 
-    int typeIndex;
+    int _typeIndex;
+    int typeIndex { get => _typeIndex; set { _typeIndex = value; if (_typeIndex >= typeCount) _typeIndex = 0; } }
     int typeCount;
     void ChangeType()
     {
@@ -205,16 +209,17 @@ public class Player : MonoBehaviour , ICollidable
         if (index >= 0 && index < typeCount)
         {
             currentType = possibleType[index];
-            ChangeMaskAndAttack(currentType.GetMaskSprite(), currentType.attackPrefab, currentType.color);
+            ChangeMaskAndAttack(currentType.GetMaskSprite(), currentType.VFXAttack, currentType.color);
             typeIndex = index + 1;
-            if (typeIndex >= typeCount)
-                typeIndex = 0;
+
+            
+            nextAttack = possibleType[typeIndex].VFXAttack;
         }
         else
             Debug.LogWarning("index out of range");
     }
 
-    void ChangeMaskAndAttack(Sprite sMask, IPoolable pAttack, Color c)
+    void ChangeMaskAndAttack(Sprite sMask, VFXAttack pAttack, Color c)
     {
         ChangeMask(sMask);//, c);
         ChangeAttack(pAttack);
@@ -230,14 +235,15 @@ public class Player : MonoBehaviour , ICollidable
         }
     }
 
-    void ChangeAttack(IPoolable p)
+    void ChangeAttack(VFXAttack attack)
     {
         if (attackTransform)
         {
-            if (p != null)
+            if (attack != null)
             {
-                attackPoolable = p.Take(Vector3.zero, Quaternion.identity, attackTransform);
-                attackPoolable.gameObject.SetActive(false);
+                currentAttack = attack;
+
+                currentAttack.attack.gameObject.SetActive(false);
             }
         }
     }
@@ -250,9 +256,12 @@ public class Player : MonoBehaviour , ICollidable
         {
             onAttack = true;
             attackTransform.gameObject.SetActive(true);
-            attackPoolable.gameObject.SetActive(true);
+            currentAttack.Play(currentAttack.attack);
+            currentAttack.Stop(currentAttack.generateAttack);
             attackTween = attackTransform.DOMove(v, PhysicsUtility.TimeFromSpaceAndVelocity(v.magnitude, speed)).OnComplete(EndAttack);
             attackTween.Play();
+
+            nextAttack.Play(nextAttack.generateAttack);
         }
     }
 
@@ -265,7 +274,9 @@ public class Player : MonoBehaviour , ICollidable
 
     void RestartAttack()
     {
-        attackPoolable.Destroy();
+        currentAttack.Stop(currentAttack.attack);
+        currentAttack.destroiedAttack.transform.position = attackTransform.position;
+        currentAttack.Play(currentAttack.destroiedAttack);
         attackTransform.gameObject.SetActive(false);
         attackTransform.position = transform.position;
         onAttack = false;
