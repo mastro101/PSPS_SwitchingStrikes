@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300000, guid: 7954dafae51372f4b8b4503d14aa28de, type: 3}
   masks:
-  - maskPrefab: {fileID: 21300000, guid: 2893cb46343b0b849a5653793569df6e, type: 3}
+  - maskSprite: {fileID: 21300000, guid: 2893cb46343b0b849a5653793569df6e, type: 3}
     type: {fileID: 11400000, guid: 4c0075cdf6c33284f9de215458bf6e08, type: 2}
-  - maskPrefab: {fileID: 21300000, guid: c84b6cd7a65d3cc4fa828abd42157e64, type: 3}
+  - maskSprite: {fileID: 21300000, guid: c84b6cd7a65d3cc4fa828abd42157e64, type: 3}
     type: {fileID: 11400000, guid: 00c8e2a47b009f8479fe5a96408a9d85, type: 2}
+  equippable: 1

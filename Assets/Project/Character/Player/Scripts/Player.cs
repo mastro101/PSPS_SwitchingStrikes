@@ -16,7 +16,7 @@ public class Player : MonoBehaviour , ICollidable
     IPoolable attackPoolable = null;
     [SerializeField] SpriteRenderer maskSprite = null;
     [Space]
-    [SerializeField] PlayerMaskScriptable maskData;
+    [SerializeField] MaskVar maskData;
     [SerializeField] int startLife = 1;
     [SerializeField] float speed = 0.5f;
     [SerializeField] public float killsComboConstant = 1f;
@@ -186,7 +186,7 @@ public class Player : MonoBehaviour , ICollidable
             EnemyType et = enemyTypeArrey.enemies[i].type;
             if (possibleType.Contains(et))
                 continue;
-            et.Setup(maskData);
+            et.Setup(maskData.value);
             possibleType.Add(et);
         }
         typeCount = possibleType.Count;

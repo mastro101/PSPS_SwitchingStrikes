@@ -18,9 +18,9 @@ public abstract class ScriptableVar<T> : ScriptableObject
 
     public virtual void SetDefault() { value = default; }
 
-    public void SetValue(T _var)
+    public T SetValue(T _var)
     {
-        value = _var;
+        return value = _var;
     }
 
     public T GetValue()

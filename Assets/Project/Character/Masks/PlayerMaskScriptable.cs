@@ -7,6 +7,7 @@ public class PlayerMaskScriptable : ScriptableObject
 {
     [SerializeField] Sprite defaultSprite = null;
     [SerializeField] MaskData[] masks = null;
+    [SerializeField] bool equippable;
 
     public Sprite GetMaskSprite(EnemyType enemyType)
     {
@@ -16,16 +17,26 @@ public class PlayerMaskScriptable : ScriptableObject
             MaskData maskData = masks[i];
             if (maskData.type == enemyType)
             {
-                return maskData.maskPrefab;
+                return maskData.maskSprite;
             }
         }
         return defaultSprite;
     }
 
+    public Sprite GetMaskSprite(int i)
+    {
+        return masks[i].maskSprite;
+    }
+
+    public bool IsUnlock()
+    {
+        return equippable;
+    }
+
     [System.Serializable]
     public class MaskData
     {
-        public Sprite maskPrefab = null;
+        public Sprite maskSprite = null;
         public EnemyType type = null;
     }
 }

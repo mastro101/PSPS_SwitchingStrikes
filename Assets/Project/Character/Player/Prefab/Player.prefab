@@ -133,7 +133,7 @@ MonoBehaviour:
   playerGraphics: {fileID: 2872037720204832736}
   attackTransform: {fileID: 1133197611586366701}
   maskSprite: {fileID: 3521285051943068695}
-  maskData: {fileID: 11400000, guid: b37d13352f35f7449b059f80b4a72fde, type: 2}
+  maskData: {fileID: 11400000, guid: 9fe7a055993b37c4abe43a87e7809263, type: 2}
   startLife: 3
   speed: 5
   killsComboConstant: 1
