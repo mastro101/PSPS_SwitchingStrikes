@@ -52,24 +52,21 @@ public class MasksMenuController : MonoBehaviour
         return i;
     }
 
-    public PlayerMaskScriptable GoRight()
+    public void GoRight()
     {
         index++;
         OnChangeRight?.Invoke(index);
-        return currentMask;
     }
 
-    public PlayerMaskScriptable GoLeft()
+    public void GoLeft()
     {
         index--;
         OnChangeLeft?.Invoke(index);
-        return currentMask;
     }
 
-    public PlayerMaskScriptable Equip()
+    public void Equip()
     {
         if (currentMask.IsUnlock())
-            return equippedMask.SetValue(currentMask);
-        return equippedMask.value;
+            equippedMask.SetValue(currentMask);
     }
 }
