@@ -198,7 +198,7 @@ MonoBehaviour:
   mouse: 1
   onUpdate: 1
   oneSwipeForTouch: 1
-  minDistance: 5
+  minDistance: 2.5
   OnSwipeUE:
     m_PersistentCalls:
       m_Calls: []
