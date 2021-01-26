@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91243ab2d9c29e45af989cb858c52e4, type: 3}
   m_Name: Mask1
   m_EditorClassIdentifier: 
-  defaultSprite: {fileID: 21300000, guid: 7954dafae51372f4b8b4503d14aa28de, type: 3}
+  defaultSprite: {fileID: 0}
   masks:
   - maskSprite: {fileID: 21300000, guid: 2893cb46343b0b849a5653793569df6e, type: 3}
     type: {fileID: 11400000, guid: 4c0075cdf6c33284f9de215458bf6e08, type: 2}
