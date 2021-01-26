@@ -241,8 +241,12 @@ public class Player : MonoBehaviour , ICollidable
         {
             if (attack != null)
             {
+                if (currentAttack != null)
+                    currentType.VFXAttack.Stop(currentAttack.generateAttack);
+                
                 currentAttack = attack;
 
+                currentType.VFXAttack.Play(currentAttack.generateAttack);
                 currentAttack.attack.gameObject.SetActive(false);
             }
         }
