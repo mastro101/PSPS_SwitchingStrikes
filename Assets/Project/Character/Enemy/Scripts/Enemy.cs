@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] int minLife = 1;
     [SerializeField] int maxLife = 3;
 
+    public SpriteRenderer maskPosition;
+
     Enemy instance;
 
     public EnemyType type { get => _type; }
@@ -36,6 +38,8 @@ public class Enemy : MonoBehaviour
     public Action OnDeath;
     void InvokeOnDeath() { OnDeath?.Invoke(); OnDeathUE?.Invoke(); }
     #endregion
+
+    public Action OnDestroy;
 
     public int currentLife { get; private set; }
 
@@ -71,11 +75,12 @@ public class Enemy : MonoBehaviour
         currentLife = startLife;
     }
 
-    public void Spawn(Vector2 pos, Quaternion rot)
+    public Enemy Spawn(Vector2 pos, Quaternion rot)
     {
         instance = poolable.Take(pos, rot).gameObject.GetComponent<Enemy>();
         instance.Setup();
         instance.InvokeOnSpawn();
+        return instance;
     }
 
     public void TakeDamage(Player player, int i = 1)
@@ -97,6 +102,7 @@ public class Enemy : MonoBehaviour
 
     public void Destroy()
     {
+        OnDestroy?.Invoke();
         poolable.Destroy();
     }
 }

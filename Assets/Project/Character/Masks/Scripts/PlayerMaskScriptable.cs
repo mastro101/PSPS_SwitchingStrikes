@@ -33,6 +33,11 @@ public class PlayerMaskScriptable : ScriptableObject
         return equippable;
     }
 
+    public void Unlock()
+    {
+        equippable = true;
+    }
+
     [System.Serializable]
     public class MaskData
     {

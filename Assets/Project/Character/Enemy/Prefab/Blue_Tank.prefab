@@ -135,5 +135,25 @@ PrefabInstance:
       propertyPath: OnDeathUE.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Enemy Death
       objectReference: {fileID: 0}
+    - target: {fileID: 8515040096166825667, guid: 35e03be82c5b0024698904b083248692, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515040096166825667, guid: 35e03be82c5b0024698904b083248692, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515040096166825667, guid: 35e03be82c5b0024698904b083248692, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8108646
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515040096166825667, guid: 35e03be82c5b0024698904b083248692, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8108646
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515040096166825667, guid: 35e03be82c5b0024698904b083248692, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8108646
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35e03be82c5b0024698904b083248692, type: 3}
