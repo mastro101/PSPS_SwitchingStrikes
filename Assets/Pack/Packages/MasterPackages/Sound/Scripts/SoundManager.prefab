@@ -103,3 +103,12 @@ MonoBehaviour:
     pitchVariance: 0
     loop: 0
     source: {fileID: 0}
+  - name: Click
+    clip: {fileID: 8300000, guid: 21ef523204536384490a94130cda5d24, type: 3}
+    type: 1
+    volume: 0.7
+    maxVolume: 0.7
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    source: {fileID: 0}
