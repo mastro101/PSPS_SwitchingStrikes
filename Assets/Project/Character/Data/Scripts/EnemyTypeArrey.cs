@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyTypeArrey", menuName = "Scriptable/Enemy/Arrey")]
 public class EnemyTypeArrey : ScriptableObject
 {
-    [SerializeField] SpawnData[] data;
+    [SerializeField] SpawnData[] data = null;
     [HideInInspector] [NonSerialized] public Enemy[] enemies;
     [NonSerialized] public float[] enemyIndex;
 

@@ -2,12 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "NewMaskData", menuName = "Scriptable/PlayerMask")]
 public class PlayerMaskScriptable : ScriptableObject
 {
     [SerializeField] Sprite defaultSprite = null;
     [SerializeField] MaskData[] masks = null;
-    [SerializeField] bool equippable;
+    [SerializeField] public bool equippable;
+
+    private void OnEnable()
+    {
+        this.hideFlags = HideFlags.DontUnloadUnusedAsset;
+    }
+
+    private void OnDisable()
+    {
+        if (Application.isPlaying)
+            Destroy(this);
+    }
 
     public Sprite GetMaskSprite(EnemyType enemyType)
     {
@@ -26,16 +38,6 @@ public class PlayerMaskScriptable : ScriptableObject
     public Sprite GetMaskSprite(int i)
     {
         return masks[i].maskSprite;
-    }
-
-    public bool IsUnlock()
-    {
-        return equippable;
-    }
-
-    public void Unlock()
-    {
-        equippable = true;
     }
 
     [System.Serializable]

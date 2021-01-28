@@ -12,7 +12,7 @@ public class DifficultController : MonoBehaviour
 
     private void Awake()
     {
-        difficultLevel.SetValue(1);
+        difficultLevel.value = 1;
         changeDifficultCorutine = gameObject.AddComponent<CorutineOnSingleWork>().SetCorutine(ChangeDifficult());
         changeDifficultCorutine.SetCorutine(ChangeDifficult());
     }
@@ -27,7 +27,7 @@ public class DifficultController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(secondToChange);
-            difficultLevel.Add(changeValue);
+            difficultLevel.value += changeValue;
         }
     }
 }

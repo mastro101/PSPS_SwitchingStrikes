@@ -1304,6 +1304,10 @@ PrefabInstance:
       propertyPath: minTime
       value: 1.3
       objectReference: {fileID: 0}
+    - target: {fileID: 576378020477231567, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
+      propertyPath: unlockableMask
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ed8ef86f6aa17f48a6f05bece77aa14, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fcbeff2b31db1a4fa285a4bbe8e532d, type: 3}
 --- !u!1001 &2872037718118300080

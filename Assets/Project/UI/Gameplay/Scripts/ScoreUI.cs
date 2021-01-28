@@ -26,7 +26,7 @@ public class ScoreUI : MonoBehaviour
         actualScoretext.text = f.ToString();
         if (f > bestScore.value)
         {
-            bestScore.SetValue(f);
+            bestScore.value = f;
             bestScoreText.text = bestScore.value.ToString();
         }
     }

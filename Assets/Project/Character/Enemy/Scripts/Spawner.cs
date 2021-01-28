@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] float minTime = 1;
     [SerializeField] float maxTime = 2;
     [SerializeField] float offsetFromVertex = 0;
-    [SerializeField] FloatData currentPoint;
+    [SerializeField] FloatData currentPoint = null;
     [SerializeField] int pointToNewMask = 100000;
     [SerializeField] PlayerMaskScriptable unlockableMask = null;
 
@@ -41,7 +41,7 @@ public class Spawner : MonoBehaviour
     {
         Enemy e = enemies.GetEnemy(Random.Range(0f, 100f));
         Enemy spawnedEnemy = e.Spawn(pos, rot);
-        if (!maskSpawned && !unlockableMask.IsUnlock() && currentPoint.value >= pointToNewMask)
+        if (!maskSpawned && !unlockableMask.equippable && currentPoint.value >= pointToNewMask)
         {
             EnemyMaskUnlockable temp = spawnedEnemy.gameObject.AddComponent<EnemyMaskUnlockable>();
             temp.Setup(spawnedEnemy, unlockableMask);

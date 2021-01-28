@@ -7,6 +7,6 @@ public class PlayerVar : ScriptableVar<Player>
 {
     private void OnDestroy()
     {
-        SetValue(null);
+        value = null;
     }
 }

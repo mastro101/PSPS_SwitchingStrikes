@@ -83,7 +83,7 @@ public class MasksMenuView : MonoBehaviour
         images[index] = Instantiate(maskImagePrefab, Vector3.right * 10000, Quaternion.identity, transform);
         Image tempImage1 = images[index];
         tempImage1.sprite = mask.GetMaskSprite(0);
-        if (!mask.IsUnlock())
+        if (!mask.equippable)
             tempImage1.color = lockColor;
     }
 

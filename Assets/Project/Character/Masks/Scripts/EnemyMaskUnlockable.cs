@@ -21,7 +21,7 @@ public class EnemyMaskUnlockable : MonoBehaviour
 
     void UnlockMask()
     {
-        mask.Unlock();
+        mask.equippable = true;
     }
 
     void Unsubscribe()

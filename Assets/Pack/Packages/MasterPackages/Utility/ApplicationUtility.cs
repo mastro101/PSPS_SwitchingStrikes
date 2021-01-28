@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ApplicationUtility : Singleton<ApplicationUtility>
 {
-    public Action OnApplicationQuitEvent;
+    public static Action OnApplicationQuitEvent;
     public Action OnApplicationStartFocusEvent;
     public Action OnApplicationEndFocusEvent;
     public Action OnApplicationStartPauseEvent;
@@ -50,7 +50,7 @@ public class ApplicationUtility : Singleton<ApplicationUtility>
     private void OnApplicationQuit()
     {
         isQuitting = true;
-        GetInstance().OnApplicationQuitEvent?.Invoke();
+        OnApplicationQuitEvent?.Invoke();
     }
 
     private void OnApplicationFocus(bool focus)

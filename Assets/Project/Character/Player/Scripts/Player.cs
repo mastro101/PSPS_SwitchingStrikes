@@ -17,7 +17,7 @@ public class Player : MonoBehaviour , ICollidable
     VFXAttack nextAttack = null;
     [SerializeField] SpriteRenderer maskSprite = null;
     [Space]
-    [SerializeField] MaskVar maskData;
+    [SerializeField] MaskVar maskData = null;
     [SerializeField] int startLife = 1;
     [SerializeField] float speed = 0.5f;
     [SerializeField] public float killsComboConstant = 1f;
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour , ICollidable
     #region Mono
     private void Awake()
     {
-        playerInstance.SetValue(this);
+        playerInstance.value = this;
     }
 
     //private void OnEnable()
@@ -117,8 +117,8 @@ public class Player : MonoBehaviour , ICollidable
 
     public void SetupData()
     {
-        currentLife.SetValue(startLife);
-        actualScore.SetValue(0);
+        currentLife.value = startLife;
+        actualScore.value = 0;
     }
 
     void SetAttackDirection()
@@ -291,7 +291,7 @@ public class Player : MonoBehaviour , ICollidable
     {
         enemyKillsCombo = 0;
         enemy.Destroy();
-        currentLife.SetValue(currentLife.GetValue() -1);
+        currentLife.value = currentLife.GetValue() - 1;
         OnDamageUE?.Invoke();
         if (currentLife.value <= 0)
             Death();

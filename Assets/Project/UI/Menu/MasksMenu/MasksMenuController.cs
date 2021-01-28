@@ -28,6 +28,11 @@ public class MasksMenuController : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        currentMask = masks[index];
+    }
+
     public PlayerMaskScriptable[] GetMasks()
     {
         return masks;
@@ -66,7 +71,7 @@ public class MasksMenuController : MonoBehaviour
 
     public void Equip()
     {
-        if (currentMask.IsUnlock())
-            equippedMask.SetValue(currentMask);
+        if (currentMask.equippable)
+            equippedMask.value = currentMask;
     }
 }

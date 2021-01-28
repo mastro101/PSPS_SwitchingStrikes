@@ -5,8 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "floatValue" , menuName = "ScriptableVar/int", order = 1)]
 public class IntData : ScriptableVar<int>
 {
-    public void Add(int i)
-    {
-        SetValue(value + i);
-    }
+
 }

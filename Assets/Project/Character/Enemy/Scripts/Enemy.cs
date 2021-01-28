@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
         player.enemyKillsCombo++;
         int score = (int)((((currentSpeed + currentLife) * scoreBase) * 1000f) * (player.killsComboConstant + (int)(player.enemyKillsCombo / player.enemyQuantityToRaiseKillMultilpier)));
         currentLife -= i;
-        player.actualScore.Add(score);
+        player.actualScore.value += score;
         InvokeOnDamage(player, i);
         if (currentLife <= 0)
             Death();

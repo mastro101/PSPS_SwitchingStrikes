@@ -9,7 +9,7 @@ public abstract class ScriptableVar<T> : ScriptableObject
     public T value 
     { 
         get { return _value; }
-        private set 
+        set 
         {
             _value = value;
             OnChangeValue?.Invoke(_value);
@@ -18,15 +18,21 @@ public abstract class ScriptableVar<T> : ScriptableObject
 
     public virtual void SetDefault() { value = default; }
 
-    public T SetValue(T _var)
-    {
-        return value = _var;
-    }
-
     public T GetValue()
     {
         return value;
     }
 
     public Action<T> OnChangeValue;
+
+    private void OnEnable()
+    {
+        this.hideFlags = HideFlags.DontUnloadUnusedAsset;
+    }
+
+    private void OnDisable()
+    {
+        if (Application.isPlaying)
+            Destroy(this);
+    }
 }

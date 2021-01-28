@@ -24,6 +24,12 @@ public class Sound
 
     [HideInInspector]
     public AudioSource source;
+
+    public void SetVolume(float v)
+    {
+        volume = v;
+        source.volume = volume;
+    }
 }
 
 [System.Serializable]
@@ -71,7 +77,7 @@ public class SoundTypeVolume
         int l = sounds.Count;
         for (int i = 0; i < l; i++)
         {
-            sounds[i].volume = volume * sounds[i].maxVolume;
+            sounds[i].SetVolume(volume * sounds[i].maxVolume);
         }
     }
 }
