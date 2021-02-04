@@ -194,8 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc4933e8380abc418a857ded6597667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touch: 1
-  mouse: 0
+  touch: 0
+  mouse: 1
   onUpdate: 1
   oneSwipeForTouch: 1
   minDistance: 2.5
