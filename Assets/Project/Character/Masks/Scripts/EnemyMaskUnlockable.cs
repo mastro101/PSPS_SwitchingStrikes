@@ -22,6 +22,7 @@ public class EnemyMaskUnlockable : MonoBehaviour
     void UnlockMask()
     {
         mask.equippable = true;
+        PlayerPrefs.SetInt(mask.name, System.Convert.ToInt32(mask.equippable));
     }
 
     void Unsubscribe()

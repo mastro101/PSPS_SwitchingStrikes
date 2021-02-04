@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class PlayerMaskScriptable : ScriptableObject
     private void OnEnable()
     {
         this.hideFlags = HideFlags.DontUnloadUnusedAsset;
+        equippable = Convert.ToBoolean(PlayerPrefs.GetInt(name, Convert.ToInt32(equippable)));
     }
 
     private void OnDisable()
