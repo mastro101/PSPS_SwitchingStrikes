@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LifeUIView : MonoBehaviour
 {
@@ -57,6 +58,7 @@ public class LifeUIView : MonoBehaviour
         for (int i = 0; i < l; i++)
         {
             IPoolable tempP = HeartsPool.GetPoolablePrefab().Take(Vector3.zero, Quaternion.identity, heartsTransformParent);
+            tempP.gameObject.transform.localScale = Vector3.one;
             hearts.Add(tempP);
         }
     }
