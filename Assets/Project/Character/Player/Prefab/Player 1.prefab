@@ -128,13 +128,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInstance: {fileID: 11400000, guid: 2c409aa4cc0fd3945921a7697c70438d, type: 2}
+  currentLife: {fileID: 0}
   swipeController: {fileID: 2872037720180407896}
   playerGraphics: {fileID: 2872037720204832736}
   attackTransform: {fileID: 1133197611586366701}
-  attackSprite: {fileID: 2136820858631309412}
   maskSprite: {fileID: 3521285051943068695}
+  maskData: {fileID: 0}
   startLife: 1
   speed: 5
+  attackPrecision: 50
   killsComboConstant: 1
   enemyQuantityToRaiseKillMultilpier: 10
   OnDamageUE:

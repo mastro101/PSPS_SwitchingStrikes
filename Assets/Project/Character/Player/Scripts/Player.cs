@@ -20,6 +20,7 @@ public class Player : MonoBehaviour , ICollidable
     [SerializeField] MaskVar maskData = null;
     [SerializeField] int startLife = 1;
     [SerializeField] float speed = 0.5f;
+    [SerializeField][Range(0f, 100f)] float attackPrecision = 0;
     [SerializeField] public float killsComboConstant = 1f;
     [SerializeField] public int enemyQuantityToRaiseKillMultilpier = 10;
     [Space]
@@ -121,6 +122,8 @@ public class Player : MonoBehaviour , ICollidable
         actualScore.value = 0;
     }
 
+    float attackAngleSize = 0f;
+    float attackAngleSizePrecisionHalf = 0f;
     void SetAttackDirection()
     {
         possibleAttackDirection = new List<AttackDirection>();
@@ -128,6 +131,8 @@ public class Player : MonoBehaviour , ICollidable
         {
             possibleAttackDirection.Add(new AttackDirection(VectorUtility.FromV2ToV3XYZ(polygonGenerator.transform.position + polygonGenerator.GetVertexPositions(i))));
         }
+        attackAngleSize = Mathf.Abs(possibleAttackDirection[1].angle - possibleAttackDirection[0].angle);
+        attackAngleSizePrecisionHalf = ((attackAngleSize / 100f) * (100f - attackPrecision)) / 2f;
     }
 
     void CheckSwipe(SwipeData swipe)
@@ -144,7 +149,8 @@ public class Player : MonoBehaviour , ICollidable
 
                 if (i == 0 && swipeAngle < angleOne)
                 {
-                    Attack(tempAttDirOne.targetPos);
+                    if (CheckPrecision(swipeAngle, angleOne))
+                        Attack(tempAttDirOne.targetPos);
                     return;
                 }
 
@@ -169,13 +175,24 @@ public class Player : MonoBehaviour , ICollidable
 
             if (distanceOne <= distanceTwo)
             {
-                Attack(tempAttDirOne.targetPos);
+                if (CheckPrecision(swipeAngle, angleOne))
+                    Attack(tempAttDirOne.targetPos);
             }
             else if (distanceOne > distanceTwo)
             {
-                Attack(tempAttDirTwo.targetPos);
+                if (CheckPrecision(swipeAngle, angleTwo))
+                    Attack(tempAttDirTwo.targetPos);
             }
         }
+    }
+
+    bool CheckPrecision(float swipeAngle, float attackAngle)
+    {
+        float p1 = attackAngle - attackAngleSizePrecisionHalf;
+        float p2 = attackAngle + attackAngleSizePrecisionHalf;
+        if (swipeAngle >= p1 && swipeAngle <= p2)
+            return true;
+        return false;
     }
 
     void SetPossibleType()

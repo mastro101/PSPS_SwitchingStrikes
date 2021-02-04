@@ -136,6 +136,7 @@ MonoBehaviour:
   maskData: {fileID: 11400000, guid: 9fe7a055993b37c4abe43a87e7809263, type: 2}
   startLife: 3
   speed: 5
+  attackPrecision: 50
   killsComboConstant: 1
   enemyQuantityToRaiseKillMultilpier: 10
   OnDamageUE:
@@ -198,7 +199,7 @@ MonoBehaviour:
   mouse: 1
   onUpdate: 1
   oneSwipeForTouch: 1
-  minDistance: 2.5
+  minDistance: 50
   OnSwipeUE:
     m_PersistentCalls:
       m_Calls: []
