@@ -13,11 +13,17 @@ public class ScoreUI : MonoBehaviour
     private void Awake()
     {
         actualScoretext.text = 0.ToString();
-        bestScoreText.text = bestScore.GetValue().ToString();
         if (score)
         {
             SetText(score.value);
             score.OnChangeValue += SetText;
+        }
+
+        if (bestScore)
+        {
+            bestScore.value = 0;
+            bestScore.value = PlayerPrefs.GetFloat("BestScore", bestScore.value);
+            bestScoreText.text = bestScore.GetValue().ToString();
         }
     }
 
@@ -28,6 +34,7 @@ public class ScoreUI : MonoBehaviour
         {
             bestScore.value = f;
             bestScoreText.text = bestScore.value.ToString();
+            PlayerPrefs.SetFloat("BestScore", bestScore.value);
         }
     }
 }
