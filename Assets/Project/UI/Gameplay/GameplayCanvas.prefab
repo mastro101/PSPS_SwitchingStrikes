@@ -211,6 +211,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7404303626616808548}
     m_Modifications:
+    - target: {fileID: 236581074096384816, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 236581074096384816, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6266098646073699835}
+    - target: {fileID: 236581074096384816, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 236581074096384816, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 236581074096384816, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 236581074096384816, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 236581074096384816, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 236581074096384816, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2254532196015252324, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
       propertyPath: m_Name
       value: Puase_menu
@@ -304,6 +336,11 @@ PrefabInstance:
 --- !u!224 &6070829301098217500 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3674574451748278944, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
+  m_PrefabInstance: {fileID: 7404303627643294396}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6266098646073699835 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3473675470297890631, guid: bf9488151de08ec458b01c3b9b4112d3, type: 3}
   m_PrefabInstance: {fileID: 7404303627643294396}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7965079681856292093
