@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ScoreUI : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI actualScoretext = null;
     [SerializeField] FloatData score = null;
     [SerializeField] FloatData bestScore = null;
+    [SerializeField] Image bestScoreImage = null;
 
     private void Awake()
     {
@@ -19,22 +21,33 @@ public class ScoreUI : MonoBehaviour
             score.OnChangeValue += SetText;
         }
 
-        if (bestScore)
+        if (bestScore && bestScoreText)
         {
             bestScore.value = 0;
             bestScore.value = PlayerPrefs.GetFloat("BestScore", bestScore.value);
             bestScoreText.text = bestScore.GetValue().ToString();
+        }
+
+        if(bestScore && bestScoreImage)
+        {
+            if (score.value == bestScore.value)
+            {
+                bestScoreImage.gameObject.SetActive(true);
+            }
         }
     }
 
     void SetText(float f)
     {
         actualScoretext.text = f.ToString();
-        if (f > bestScore.value)
+        if (bestScore)
         {
-            bestScore.value = f;
-            bestScoreText.text = bestScore.value.ToString();
-            PlayerPrefs.SetFloat("BestScore", bestScore.value);
+            if (f > bestScore.value)
+            {
+                bestScore.value = f;
+                bestScoreText.text = bestScore.value.ToString();
+                PlayerPrefs.SetFloat("BestScore", bestScore.value);
+            }
         }
     }
 }
