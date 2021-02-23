@@ -112,3 +112,12 @@ MonoBehaviour:
     pitchVariance: 0
     loop: 0
     source: {fileID: 0}
+  - name: WearMask
+    clip: {fileID: 8300000, guid: 1f4ee1da1be840f4cae605aa1670828d, type: 3}
+    type: 1
+    volume: 0.7
+    maxVolume: 0.7
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    source: {fileID: 0}
