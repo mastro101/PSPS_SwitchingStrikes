@@ -90,22 +90,22 @@ public class MasksMenuView : MonoBehaviour
     void ChangeViewRight(int MaskIndex)
     {
         index++;
-        images[index].transform.DOMove(currentMaskPos.position, animationDuration);
+        images[index].transform.DOMove(currentMaskPos.position, animationDuration).SetUpdate(true);
         images[GetNext(1)].transform.position = marginRightPos.position;
-        images[GetNext(1)].transform.DOMove(rightMaskPos.position, animationDuration);
+        images[GetNext(1)].transform.DOMove(rightMaskPos.position, animationDuration).SetUpdate(true);
         images[GetNext(2)].transform.position = marginRightPos.position;
-        images[GetNext(-1)].transform.DOMove(leftMaskPos.position, animationDuration);
-        images[GetNext(-2)].transform.DOMove(marginLeftPos.position, animationDuration);
+        images[GetNext(-1)].transform.DOMove(leftMaskPos.position, animationDuration).SetUpdate(true);
+        images[GetNext(-2)].transform.DOMove(marginLeftPos.position, animationDuration).SetUpdate(true);
     }
     
     void ChangeViewLeft(int MaskIndex)
     {
         index--;
-        images[index].transform.DOMove(currentMaskPos.position, animationDuration);
-        images[GetNext(1)].transform.DOMove(rightMaskPos.position, animationDuration);
-        images[GetNext(2)].transform.DOMove(marginRightPos.position, animationDuration);
+        images[index].transform.DOMove(currentMaskPos.position, animationDuration).SetUpdate(true);
+        images[GetNext(1)].transform.DOMove(rightMaskPos.position, animationDuration).SetUpdate(true);
+        images[GetNext(2)].transform.DOMove(marginRightPos.position, animationDuration).SetUpdate(true);
         images[GetNext(-1)].transform.position = marginLeftPos.position;
-        images[GetNext(-1)].transform.DOMove(leftMaskPos.position, animationDuration);
+        images[GetNext(-1)].transform.DOMove(leftMaskPos.position, animationDuration).SetUpdate(true);
         images[GetNext(-2)].transform.position = marginLeftPos.position;
     }
 
